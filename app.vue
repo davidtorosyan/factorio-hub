@@ -1,17 +1,25 @@
 <script setup>
 import 'primevue/resources/themes/aura-light-green/theme.css'
 
-const color = ref('')
+const sciencePackOptions = ref([
+  { name: 'Red', value: 'automation-science-pack' },
+  { name: 'Green', value: 'logistic-science-pack' },
+])
+const sciencePacks = ref([])
 
 </script>
 
 <template>
   <div>
     <h1>Factorio Planner</h1>
-    <ColorPicker
-      v-model="color"
-      inline
+    <SelectButton
+      v-model="sciencePacks"
+      :options="sciencePackOptions"
+      option-label="name"
+      option-value="value"
+      multiple
+      aria-labelledby="multiple"
     />
-    Color: {{ color }}
+    Selected: {{ sciencePacks }}
   </div>
 </template>
