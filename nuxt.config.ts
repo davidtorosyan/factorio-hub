@@ -4,5 +4,5 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true
   },
-  modules: ['@nuxt/ui', "@nuxt/content"]
+  modules: ['nuxt-primevue', "@nuxt/content"]
 })
