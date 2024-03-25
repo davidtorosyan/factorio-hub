@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import 'primevue/resources/themes/aura-light-green/theme.css'
+import type RecipeMap from './composables/useRecipes'
 
 const sciencePackOptions = ref([
   { name: 'Red', value: 'automation-science-pack' },
@@ -7,13 +8,13 @@ const sciencePackOptions = ref([
 ])
 const sciencePacks = ref([])
 
-const recipes = useRecipes()
+const recipes = await useRecipes()
 
 const manifest = computed(() => {
-  const queue = []
+  const queue = [] as string[]
   queue.push(...sciencePacks.value)
 
-  const result = []
+  const result = [] as string[]
 
   // while (queue.length > 0) {
   //   const item = queue.shift()
@@ -50,6 +51,6 @@ const manifest = computed(() => {
     <!-- JSON: {{ recipes }} -->
     <!-- {{ recipes[sciencePacks[0]]?.ingredients }} -->
     Manifest: {{ manifest }} 
-    foo: {{ foo }}
+    recipes: {{ recipes }}
   </div>
 </template>

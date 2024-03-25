@@ -4,5 +4,8 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true
   },
-  modules: ['nuxt-primevue', "@nuxt/content"]
+  modules: ['nuxt-primevue', "@nuxt/content"],
+  experimental: {
+    asyncContext: true
+  }
 })
