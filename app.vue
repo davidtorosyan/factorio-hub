@@ -33,6 +33,6 @@ const manifest = useManifest(needs, recipes)
     <!-- JSON: {{ recipes }} -->
     <!-- {{ recipes[sciencePacks[0]]?.ingredients }} -->
     Manifest: {{ manifest }} 
-    <!-- recipes: {{ recipes }} -->
+    Recipes: {{ recipes }}
   </div>
 </template>

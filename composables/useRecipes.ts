@@ -15,11 +15,35 @@ export async function useRecipes (): Promise<Ref<RecipeMap>> {
 
     result.value[name] = {
       name,
-      ingredients
+      ingredients,
+      factors: new Set()
     }
+  }
+  
+  for (const name of Object.keys(result.value)) {
+    setFactors(name, result.value)
   }
 
   return result
+}
+
+function setFactors(name: string, recipeMap: RecipeMap) : Set<string> {
+  const recipe = recipeMap[name]
+  if (!recipe) {
+    return new Set()
+  }
+  const factors = recipe.factors
+  if (factors.size > 0) {
+    return factors
+  }
+
+  for (const ingredient of recipe.ingredients) {
+    factors.add(ingredient.name)
+    // const ingredientFactors = setFactors(ingredient.name, recipeMap)
+    // ingredientFactors.forEach(factor => factors.add(factor))
+  }
+
+  return factors
 }
 
 function convertIngredients(recipeJson: any) : Ingredient[] {

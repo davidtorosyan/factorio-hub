@@ -6,6 +6,7 @@ type Ingredient = {
 type Recipe = {
   name: string,
   ingredients: Ingredient[]
+  factors: Set<string>
 }
 
 type RecipeMap = {
