@@ -1,18 +1,4 @@
-type Ingredient = {
-  name: string,
-  count: number,
-}
-
-type Recipe = {
-  name: string,
-  ingredients: Ingredient[]
-}
-
-type RecipeMap = {
-  [key: string]: Recipe
-}
-
-export default async function (): Promise<Ref<RecipeMap>> {
+export async function useRecipes (): Promise<Ref<RecipeMap>> {
   const contentJson = await queryContent('/data-raw').findOne()
   const result = ref({} as RecipeMap)
 

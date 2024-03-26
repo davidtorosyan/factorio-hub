@@ -6,36 +6,8 @@ const sciencePackOptions = ref([
   { name: 'Green', value: 'logistic-science-pack' },
 ])
 const sciencePacks = ref([])
-
 const recipes = await useRecipes()
-
-const manifest = computed(() => {
-  const queue = [] as string[]
-  queue.push(...sciencePacks.value)
-
-  const result = [] as string[]
-
-  while (queue.length > 0) {
-    const item = queue.shift()
-    if (typeof item !== 'string') {
-      continue
-    }
-
-    const recipe = recipes.value[item]
-    if (!recipe) {
-      console.error(`No recipe found for ${item}`)
-      result.push(item)
-      continue
-    }
-
-    for (const ingredient of recipe.ingredients) {
-      queue.push(ingredient.name)
-    }
-  }
-
-  return result
-})
-
+const manifest = useManifest(sciencePacks, recipes)
 </script>
 
 <template>
