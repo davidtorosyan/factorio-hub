@@ -1,5 +1,5 @@
-export function useManifest (sciencePacks: Ref<string[]>, recipes: Ref<RecipeMap>): Ref<string[]> {
-  const result = ref([] as string[])
+export function useManifest (sciencePacks: Ref<string[]>, recipes: Ref<RecipeMap>): Ref<Manifest> {
+  const result = ref({} as Manifest)
 
   watchEffect(() => {
     result.value = computeManifest(toValue(sciencePacks), toValue(recipes))
@@ -8,8 +8,8 @@ export function useManifest (sciencePacks: Ref<string[]>, recipes: Ref<RecipeMap
   return result
 }
 
-function computeManifest(sciencePacks: string[], recipes: RecipeMap) : string[] {
-  const result = [] as string[]
+function computeManifest(sciencePacks: string[], recipes: RecipeMap) : Manifest {
+  const result = {} as Manifest
 
   const queue = [] as string[]
   queue.push(...sciencePacks)
@@ -20,10 +20,13 @@ function computeManifest(sciencePacks: string[], recipes: RecipeMap) : string[] 
       continue
     }
 
+    const target = result[item] ?? { name: item, count: 0 }
+    target.count++
+    result[item] = target
+
     const recipe = recipes[item]
     if (!recipe) {
       console.error(`No recipe found for ${item}`)
-      result.push(item)
       continue
     }
 

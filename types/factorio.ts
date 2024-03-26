@@ -11,3 +11,12 @@ type Recipe = {
 type RecipeMap = {
   [key: string]: Recipe
 }
+
+type Target = {
+  name: string,
+  count: number,
+}
+
+type Manifest = {
+  [key: string]: Target
+}
