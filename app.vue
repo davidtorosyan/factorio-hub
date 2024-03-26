@@ -7,7 +7,15 @@ const sciencePackOptions = ref([
 ])
 const sciencePacks = ref([])
 const recipes = await useRecipes()
-const manifest = useManifest(sciencePacks, recipes)
+const needs = computed(() => {
+  return sciencePacks.value.map((pack) => {
+    return {
+      name: pack,
+      count: 1
+    }
+  })
+})
+const manifest = useManifest(needs, recipes)
 </script>
 
 <template>

@@ -12,6 +12,11 @@ type RecipeMap = {
   [key: string]: Recipe
 }
 
+type Need = {
+  name: string,
+  count: number,
+}
+
 type Target = {
   name: string,
   count: number,
