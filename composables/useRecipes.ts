@@ -39,8 +39,8 @@ function setFactors(name: string, recipeMap: RecipeMap) : Set<string> {
 
   for (const ingredient of recipe.ingredients) {
     factors.add(ingredient.name)
-    // const ingredientFactors = setFactors(ingredient.name, recipeMap)
-    // ingredientFactors.forEach(factor => factors.add(factor))
+    const ingredientFactors = setFactors(ingredient.name, recipeMap)
+    ingredientFactors.forEach(factor => factors.add(factor))
   }
 
   return factors
