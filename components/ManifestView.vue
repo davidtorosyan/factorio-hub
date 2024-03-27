@@ -6,10 +6,11 @@ defineProps<{
 
 </script>
 <template>
-  <div>
+  <div class="grid">
     <div
       v-for="target in data"
       :key="target.name"
+      class="col-3"
     >
       <TargetView :data="target" />
     </div>

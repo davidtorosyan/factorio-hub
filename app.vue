@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import 'primevue/resources/themes/aura-light-amber/theme.css'
+import 'primeflex/primeflex.css';
 
 const sciencePackOptions = ref([
   { name: 'Red', value: 'automation-science-pack' },

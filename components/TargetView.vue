@@ -19,6 +19,8 @@ defineProps<{
 
 <style scoped>
   .target {
-    background-color: var(--primary-400)
+    background-color: var(--primary-400);
+    width: 200px;
+    height: 200px;
   }
 </style>
