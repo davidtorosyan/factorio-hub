@@ -1,4 +1,4 @@
-import TinyQueue from "tinyqueue"
+import TinyQueue, { type Comparator } from "tinyqueue"
 
 export function useManifest (neededItems: Ref<Need[]>, recipes: Ref<RecipeMap>): Ref<Manifest> {
   const result = ref({} as Manifest)
@@ -13,24 +13,39 @@ export function useManifest (neededItems: Ref<Need[]>, recipes: Ref<RecipeMap>):
 function computeManifest(neededItems: Need[], recipes: RecipeMap) : Manifest {
   const result = {} as Manifest
 
-  const queue = new TinyQueue();
+  const queue = new TinyQueue([] as Need[], getRecipeComparator(recipes));
   neededItems.forEach(item => queue.push(item))
   
   while (queue.length > 0) {
-    const item = queue.pop() as Need
-    
+    const item = queue.pop()
+    if (item === undefined) {
+      continue
+    }
+
     const name = item.name
     if (name in result) {
       console.error(`Already processed ${name}`)
+      continue
     }
-    const target = result[name] ?? { name, count: 0 }
-    target.count += item.rate
-    result[name] = target
+    
+    let category: RecipeCategory
+    let seconds: number
 
     const recipe = recipes[name]
-    if (!recipe) {
-      console.error(`No recipe found for ${name}`)
-      continue
+    if (recipe) {
+      category = recipe.category
+      seconds = recipe.seconds
+    } else {
+      category = 'mining'
+      seconds = 0.5
+    }
+
+    const count = item.rate / seconds
+
+    result[name] = {
+      name,
+      count,
+      category
     }
 
     for (const ingredient of recipe.ingredients) {
@@ -42,4 +57,21 @@ function computeManifest(neededItems: Need[], recipes: RecipeMap) : Manifest {
   }
 
   return result
+}
+
+function getRecipeComparator(recipes: RecipeMap): Comparator<Need> {
+  return (a, b) => {
+    const recipeA = recipes[a.name]
+    const recipeB = recipes[b.name]
+    if (recipeA === undefined || recipeB === undefined) {
+      return 0
+    }
+    if (recipeA.factors.has(recipeB.name)) {
+      return -1
+    }
+    if (recipeB.factors.has(recipeA.name)) {
+      return 1
+    }
+    return recipeA.name.localeCompare(recipeB.name)
+  }
 }

@@ -1,6 +1,6 @@
 type Ingredient = {
-  name: string,
-  count: number,
+  name: string
+  count: number
 }
 
 type RecipeCategory = 'assembly' | 'mining' | 'smelting' | 'oil-processing' | 'chemistry'
@@ -18,13 +18,14 @@ type RecipeMap = {
 }
 
 type Need = {
-  name: string,
-  rate: number,
+  name: string
+  rate: number
 }
 
 type Target = {
-  name: string,
-  count: number,
+  name: string
+  count: number
+  category: RecipeCategory
 }
 
 type Manifest = {

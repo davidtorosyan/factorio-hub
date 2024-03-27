@@ -13,6 +13,7 @@ defineProps<{
     <template #content>
       <p>Name: {{ data.name }}</p>
       <p>Count: {{ data.count }}</p>
+      <p>Category: {{ data.category }}</p>
     </template>
   </Card>
 </template>
@@ -21,6 +22,6 @@ defineProps<{
   .target {
     background-color: var(--primary-400);
     width: 200px;
-    height: 200px;
+    height: 400px;
   }
 </style>
