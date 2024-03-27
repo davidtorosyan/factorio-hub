@@ -3,10 +3,14 @@ type Ingredient = {
   count: number,
 }
 
+type RecipeCategory = 'assembly' | 'mining' | 'smelting' | 'oil-processing' | 'chemistry'
+
 type Recipe = {
   name: string,
   ingredients: Ingredient[]
   factors: Set<string>
+  seconds: number
+  category: RecipeCategory
 }
 
 type RecipeMap = {

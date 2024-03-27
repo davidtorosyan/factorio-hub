@@ -6,17 +6,23 @@ export async function useRecipes (): Promise<Ref<RecipeMap>> {
 
   for (const recipeJson of Object.values(recipesJson) as any[]) {
     const nameJson = recipeJson.name
+    const energyJson = recipeJson.energy_required
+    const categoryJson = recipeJson.category
   
     if (typeof nameJson !== 'string') {
       continue
     }
     const name = nameJson
     const ingredients = convertIngredients(recipeJson)
+    const category = convertCategory(categoryJson)
+    const seconds = parseFloat(energyJson) ?? 0
 
     result.value[name] = {
       name,
       ingredients,
-      factors: new Set()
+      category,
+      seconds,
+      factors: new Set(),
     }
   }
   
@@ -68,4 +74,17 @@ function convertIngredients(recipeJson: any) : Ingredient[] {
   }
 
   return ingredients
+}
+
+function convertCategory(categoryJson: any): RecipeCategory {
+  switch (categoryJson) {
+    case undefined:
+      return 'assembly'
+    case 'smelting':
+    case 'oil-processing':
+    case 'chemistry':
+      return categoryJson
+    default:
+      return 'assembly'
+  }
 }
