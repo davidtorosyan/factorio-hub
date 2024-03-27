@@ -32,7 +32,8 @@ const manifest = useManifest(needs, recipes)
     Selected: {{ sciencePacks }}
     <!-- JSON: {{ recipes }} -->
     <!-- {{ recipes[sciencePacks[0]]?.ingredients }} -->
-    Manifest: {{ manifest }} 
-    Recipes: {{ recipes }}
+    <!-- Manifest: {{ manifest }}  -->
+    <ManifestView :data="manifest" />
+    <!-- Recipes: {{ recipes }} -->
   </div>
 </template>
