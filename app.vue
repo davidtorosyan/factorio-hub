@@ -12,7 +12,7 @@ const needs = computed(() => {
   return sciencePacks.value.map((pack) => {
     return {
       name: pack,
-      count: 1
+      rate: 1
     }
   })
 })

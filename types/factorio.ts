@@ -19,7 +19,7 @@ type RecipeMap = {
 
 type Need = {
   name: string,
-  count: number,
+  rate: number,
 }
 
 type Target = {
