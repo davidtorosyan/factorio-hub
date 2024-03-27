@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import 'primevue/resources/themes/aura-light-green/theme.css'
+import 'primevue/resources/themes/aura-light-amber/theme.css'
 
 const sciencePackOptions = ref([
   { name: 'Red', value: 'automation-science-pack' },
@@ -21,7 +21,8 @@ const manifest = useManifest(needs, recipes)
 <template>
   <div>
     <h1>Factorio Planner</h1>
-    <SelectButton
+
+    Select science: <SelectButton
       v-model="sciencePacks"
       :options="sciencePackOptions"
       option-label="name"
@@ -29,11 +30,12 @@ const manifest = useManifest(needs, recipes)
       multiple
       aria-labelledby="multiple"
     />
-    Selected: {{ sciencePacks }}
-    <!-- JSON: {{ recipes }} -->
-    <!-- {{ recipes[sciencePacks[0]]?.ingredients }} -->
-    <!-- Manifest: {{ manifest }}  -->
     <ManifestView :data="manifest" />
-    <!-- Recipes: {{ recipes }} -->
   </div>
 </template>
+
+<style>
+  body {
+    background-color: var(--surface-ground)
+  }
+</style>

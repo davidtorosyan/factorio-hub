@@ -6,7 +6,7 @@ defineProps<{
 
 </script>
 <template>
-  <Card>
+  <Card class="target">
     <template #title>
       {{ data.name }}
     </template>
@@ -16,3 +16,9 @@ defineProps<{
     </template>
   </Card>
 </template>
+
+<style scoped>
+  .target {
+    background-color: var(--primary-400)
+  }
+</style>
