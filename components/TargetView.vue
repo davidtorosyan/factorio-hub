@@ -12,7 +12,7 @@ defineProps<{
     </template>
     <template #content>
       <p>Name: {{ data.name }}</p>
-      <p>Count: {{ data.count }}</p>
+      <p>Rate: {{ data.rate }}</p>
       <p>Category: {{ data.category }}</p>
     </template>
   </Card>

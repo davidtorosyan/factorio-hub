@@ -13,48 +13,46 @@ export function useManifest (neededItems: Ref<Need[]>, recipes: Ref<RecipeMap>):
 function computeManifest(neededItems: Need[], recipes: RecipeMap) : Manifest {
   const result = {} as Manifest
 
-  const queue = new TinyQueue([] as Need[], getRecipeComparator(recipes));
-  neededItems.forEach(item => queue.push(item))
+  const queue = new HashQueue(a => a.name, (a, b) => a.rate += b.rate, [] as Need[], getRecipeComparator(recipes));
+  neededItems.forEach(item => queue.pushOrUpdate(item))
   
   while (queue.length > 0) {
-    const item = queue.pop()
-    if (item === undefined) {
+    const needed = queue.pop()
+    if (needed === undefined) {
       continue
     }
+    console.log('Processing', needed.name)
 
-    const name = item.name
+    const name = needed.name
     if (name in result) {
       console.error(`Already processed ${name}`)
       continue
     }
     
     let category: RecipeCategory
-    let seconds: number
     let ingredients: Ingredient[]
 
     const recipe = recipes[name]
     if (recipe) {
       category = recipe.category
-      seconds = recipe.seconds
       ingredients = recipe.ingredients
     } else {
       category = 'mining'
-      seconds = 0.5
       ingredients = []
     }
 
-    const count = item.rate / seconds
+    const rate = needed.rate
 
     result[name] = {
       name,
-      count,
+      rate,
       category
     }
 
     for (const ingredient of ingredients) {
-      queue.push({
+      queue.pushOrUpdate({
         name: ingredient.name,
-        rate: ingredient.count,
+        rate: ingredient.count * rate,
       })
     }
   }

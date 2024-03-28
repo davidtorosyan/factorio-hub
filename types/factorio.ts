@@ -24,7 +24,7 @@ type Need = {
 
 type Target = {
   name: string
-  count: number
+  rate: number
   category: RecipeCategory
 }
 
