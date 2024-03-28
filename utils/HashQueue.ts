@@ -48,6 +48,7 @@ export default class HashQueue<Item> {
       this.updater(existing, item);
     } else {
       this.queue.push(item);
+      this.map.set(key, item);
     }
     this.length = this.queue.length;
   }
