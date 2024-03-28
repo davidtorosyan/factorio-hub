@@ -30,14 +30,17 @@ function computeManifest(neededItems: Need[], recipes: RecipeMap) : Manifest {
     
     let category: RecipeCategory
     let seconds: number
+    let ingredients: Ingredient[]
 
     const recipe = recipes[name]
     if (recipe) {
       category = recipe.category
       seconds = recipe.seconds
+      ingredients = recipe.ingredients
     } else {
       category = 'mining'
       seconds = 0.5
+      ingredients = []
     }
 
     const count = item.rate / seconds
@@ -48,7 +51,7 @@ function computeManifest(neededItems: Need[], recipes: RecipeMap) : Manifest {
       category
     }
 
-    for (const ingredient of recipe.ingredients) {
+    for (const ingredient of ingredients) {
       queue.push({
         name: ingredient.name,
         rate: ingredient.count,
