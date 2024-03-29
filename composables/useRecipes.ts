@@ -1,7 +1,45 @@
+import type { ParsedContent } from "@nuxt/content/types"
+
 export async function useRecipes (): Promise<Ref<RecipeMap>> {
   const contentJson = await queryContent('/data-raw').findOne()
   const result = ref({} as RecipeMap)
+  
+  setRecipes(contentJson, result.value)
+  setResources(contentJson, result.value)
+  
+  for (const name of Object.keys(result.value)) {
+    setFactors(name, result.value)
+  }
 
+  return result
+}
+
+function setResources (contentJson: ParsedContent, recipeMap: RecipeMap) {
+  const resourcesJson = contentJson.resource
+
+  for (const resourceJson of Object.values(resourcesJson) as any[]) {
+    const nameJson = resourceJson.name
+    if (typeof nameJson !== 'string') {
+      continue
+    }
+
+    const name = nameJson
+    const category = 'mining'
+
+    // since we'll be multiplying times later, use 1 here as the unit value
+    const seconds = 1
+
+    recipeMap[name] = {
+      name,
+      ingredients: [],
+      category,
+      seconds,
+      factors: new Set(),
+    }
+  }
+}
+
+function setRecipes (contentJson: ParsedContent, recipeMap: RecipeMap) {
   const recipesJson = contentJson.recipe
 
   for (const recipeJson of Object.values(recipesJson) as any[]) {
@@ -17,7 +55,7 @@ export async function useRecipes (): Promise<Ref<RecipeMap>> {
     const category = convertCategory(categoryJson)
     const seconds = parseFloat(energyJson) ?? 0
 
-    result.value[name] = {
+    recipeMap[name] = {
       name,
       ingredients,
       category,
@@ -25,12 +63,6 @@ export async function useRecipes (): Promise<Ref<RecipeMap>> {
       factors: new Set(),
     }
   }
-  
-  for (const name of Object.keys(result.value)) {
-    setFactors(name, result.value)
-  }
-
-  return result
 }
 
 function setFactors(name: string, recipeMap: RecipeMap) : Set<string> {

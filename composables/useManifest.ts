@@ -13,7 +13,7 @@ export function useManifest (neededItems: Ref<Need[]>, recipes: Ref<RecipeMap>):
 function computeManifest(neededItems: Need[], recipes: RecipeMap) : Manifest {
   const result = {} as Manifest
 
-  const queue = new HashQueue(a => a.name, (a, b) => a.rate += b.rate, [] as Need[], getRecipeComparator(recipes));
+  const queue = new HashQueue<Need>(a => a.name, (a, b) => a.rate += b.rate, [], getRecipeComparator(recipes));
   neededItems.forEach(item => queue.pushOrUpdate(item))
   
   while (queue.length > 0) {
@@ -21,7 +21,6 @@ function computeManifest(neededItems: Need[], recipes: RecipeMap) : Manifest {
     if (needed === undefined) {
       continue
     }
-    console.log('Processing', needed.name)
 
     const name = needed.name
     if (name in result) {
@@ -29,18 +28,14 @@ function computeManifest(neededItems: Need[], recipes: RecipeMap) : Manifest {
       continue
     }
     
-    let category: RecipeCategory
-    let ingredients: Ingredient[]
-
     const recipe = recipes[name]
-    if (recipe) {
-      category = recipe.category
-      ingredients = recipe.ingredients
-    } else {
-      category = 'mining'
-      ingredients = []
+    if (recipe === undefined) {
+      console.error(`Recipe not found for ${name}`)
+      continue
     }
 
+    const category = recipe.category
+    const ingredients = recipe.ingredients
     const rate = needed.rate
 
     result[name] = {
