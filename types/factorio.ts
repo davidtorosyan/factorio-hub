@@ -8,6 +8,7 @@ type RecipeCategory = 'assembly' | 'mining' | 'smelting' | 'oil-processing' | 'c
 type Recipe = {
   name: string,
   ingredients: Ingredient[]
+  resultCount: number,
   factors: Set<string>
   seconds: number
   category: RecipeCategory
@@ -25,7 +26,7 @@ type Need = {
 type Target = {
   name: string
   rate: number
-  category: RecipeCategory
+  recipe: Recipe
 }
 
 type Manifest = {

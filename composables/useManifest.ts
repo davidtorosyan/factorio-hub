@@ -34,20 +34,20 @@ function computeManifest(neededItems: Need[], recipes: RecipeMap) : Manifest {
       continue
     }
 
-    const category = recipe.category
     const ingredients = recipe.ingredients
+    const resultCount = recipe.resultCount
     const rate = needed.rate
 
     result[name] = {
       name,
       rate,
-      category
+      recipe,
     }
 
     for (const ingredient of ingredients) {
       queue.pushOrUpdate({
         name: ingredient.name,
-        rate: ingredient.count * rate,
+        rate: ingredient.count * rate / resultCount,
       })
     }
   }

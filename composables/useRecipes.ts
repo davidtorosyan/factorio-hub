@@ -25,6 +25,7 @@ function setResources (contentJson: ParsedContent, recipeMap: RecipeMap) {
 
     const name = nameJson
     const category = 'mining'
+    const resultCount = 1
 
     // since we'll be multiplying times later, use 1 here as the unit value
     const seconds = 1
@@ -32,6 +33,7 @@ function setResources (contentJson: ParsedContent, recipeMap: RecipeMap) {
     recipeMap[name] = {
       name,
       ingredients: [],
+      resultCount,
       category,
       seconds,
       factors: new Set(),
@@ -44,6 +46,7 @@ function setRecipes (contentJson: ParsedContent, recipeMap: RecipeMap) {
 
   for (const recipeJson of Object.values(recipesJson) as any[]) {
     const nameJson = recipeJson.name
+    const resultCountJson = recipeJson.result_count
     const energyJson = recipeJson.energy_required
     const categoryJson = recipeJson.category
   
@@ -52,12 +55,14 @@ function setRecipes (contentJson: ParsedContent, recipeMap: RecipeMap) {
     }
     const name = nameJson
     const ingredients = convertIngredients(recipeJson)
+    const resultCount = convertNumber(resultCountJson) ?? 1
     const category = convertCategory(categoryJson)
-    const seconds = parseFloat(energyJson) ?? 0
+    const seconds = convertNumber(energyJson) ?? 1
 
     recipeMap[name] = {
       name,
       ingredients,
+      resultCount,
       category,
       seconds,
       factors: new Set(),
@@ -82,6 +87,13 @@ function setFactors(name: string, recipeMap: RecipeMap) : Set<string> {
   }
 
   return factors
+}
+
+function convertNumber(json: any): number | undefined {
+  if (json === undefined) {
+    return undefined
+  }
+  return parseFloat(json)
 }
 
 function convertIngredients(recipeJson: any) : Ingredient[] {
