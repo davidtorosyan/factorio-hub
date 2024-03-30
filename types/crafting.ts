@@ -3,7 +3,7 @@ type Ingredient = {
   count: number
 }
 
-type RecipeCategory = 'assembly' | 'mining' | 'smelting' | 'oil-processing' | 'chemistry'
+type RecipeCategory = 'assembly' | 'mining' | 'smelting' | 'oil-processing' | 'chemistry' | 'oil-mining'
 
 type Recipe = {
   name: string,

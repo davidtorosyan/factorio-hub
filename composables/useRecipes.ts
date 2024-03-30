@@ -89,13 +89,6 @@ function setFactors(name: string, recipeMap: RecipeMap) : Set<string> {
   return factors
 }
 
-function convertNumber(json: any): number | undefined {
-  if (json === undefined) {
-    return undefined
-  }
-  return parseFloat(json)
-}
-
 function convertIngredients(recipeJson: any) : Ingredient[] {
   const ingredientsJson = recipeJson.ingredients
   const normalJson = recipeJson.normal

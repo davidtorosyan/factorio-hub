@@ -17,6 +17,7 @@ const needs = computed(() => {
   })
 })
 const manifest = useManifest(needs, recipes)
+const builders = await useBuilders()
 </script>
 
 <template>
@@ -32,6 +33,7 @@ const manifest = useManifest(needs, recipes)
       aria-labelledby="multiple"
     />
     <ManifestView :data="manifest" />
+    builders: {{ builders }}
   </div>
 </template>
 

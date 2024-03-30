@@ -1,4 +1,4 @@
-import { type Comparator } from "tinyqueue"
+import type { Comparator } from "~/utils/HashQueue"
 
 export function useManifest (neededItems: Ref<Need[]>, recipes: Ref<RecipeMap>): Ref<Manifest> {
   const result = ref({} as Manifest)
