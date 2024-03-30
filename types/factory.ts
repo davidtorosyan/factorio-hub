@@ -15,3 +15,20 @@ type Science = {
   speedEffects: number[]
   researchTimes: number[]
 }
+
+type FactoryCriteria = {
+  science: Science
+  builders: BuilderMap
+}
+
+type BuilderChoice = {
+  [key in RecipeCategory]: string
+}
+
+type FactoryConfig = {
+  labs: number
+  sciencePacks: string[]
+  speedEffect: number
+  researchTime: number
+  builders: BuilderChoice
+}

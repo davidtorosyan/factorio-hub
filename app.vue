@@ -19,11 +19,40 @@ const needs = computed(() => {
 const manifest = useManifest(needs, recipes)
 const builders = await useBuilders()
 const science = await useScience()
+
+const criteria = computed(() => {
+  return {
+    science: science.value,
+    builders: builders.value,
+  }
+})
+
+const config: Ref<FactoryConfig> = ref({
+  labs: 0,
+  sciencePacks: [],
+  speedEffect: 0,
+  researchTime: 0,
+  builders: {
+    'chemistry': '',
+    'assembly': '',
+    'smelting': '',
+    'mining': '',
+    'oil-mining': '',
+    'oil-processing': '',
+  },
+})
+
 </script>
 
 <template>
   <div>
     <h1>Factorio Planner</h1>
+
+    <ConfigView
+      v-model="config"
+      :data="criteria"
+    />
+    Science packs: {{ config.sciencePacks }}
 
     Select science: <SelectButton
       v-model="sciencePacks"
