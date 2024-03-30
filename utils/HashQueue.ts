@@ -41,15 +41,17 @@ export default class HashQueue<Item> {
     return item;
   }
 
-  pushOrUpdate (item: Item) : void {
+  pushOrUpdate (item: Item) : boolean {
     const key = this.keySelector(item);
     const existing = this.map.get(key);
     if (existing !== undefined) {
       this.updater(existing, item);
+      return false
     } else {
       this.queue.push(item);
       this.map.set(key, item);
+      this.length = this.queue.length;
+      return true
     }
-    this.length = this.queue.length;
   }
 }

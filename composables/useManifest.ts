@@ -12,8 +12,8 @@ export function useManifest (neededItems: Ref<Need[]>, recipes: Ref<RecipeMap>):
 
 function computeManifest(neededItems: Need[], recipes: RecipeMap) : Manifest {
   const result = {} as Manifest
-
-  const queue = new HashQueue<Need>(a => a.name, (a, b) => a.rate += b.rate, [], getRecipeComparator(recipes));
+  
+  const queue = new HashQueue<Need>(a => a.name, (a, b) => a.rate += b.rate, [], getNeedComparator(recipes))
   neededItems.forEach(item => queue.pushOrUpdate(item))
   
   while (queue.length > 0) {
@@ -55,11 +55,14 @@ function computeManifest(neededItems: Need[], recipes: RecipeMap) : Manifest {
   return result
 }
 
-function getRecipeComparator(recipes: RecipeMap): Comparator<Need> {
+function getRecipeComparator(recipes: RecipeMap): Comparator<string> {
   return (a, b) => {
-    const recipeA = recipes[a.name]
-    const recipeB = recipes[b.name]
-    if (recipeA === undefined || recipeB === undefined) {
+    const recipeA = recipes[a]
+    const recipeB = recipes[b]
+    if (recipeA === undefined || 
+      recipeB === undefined || 
+      recipeA.factors === undefined || 
+      recipeB.factors === undefined) {
       return 0
     }
     if (recipeA.factors.has(recipeB.name)) {
@@ -69,5 +72,12 @@ function getRecipeComparator(recipes: RecipeMap): Comparator<Need> {
       return 1
     }
     return recipeA.name.localeCompare(recipeB.name)
+  }
+}
+
+function getNeedComparator(recipes: RecipeMap): Comparator<Need> {
+  const recipeCompare = getRecipeComparator(recipes)
+  return (a, b) => {
+    return recipeCompare(a.name, b.name)
   }
 }
