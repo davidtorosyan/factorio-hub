@@ -8,3 +8,10 @@ type Builder = {
 type BuilderMap = {
   [key: string]: Builder
 }
+
+type Science = {
+  sciencePacks: string[]
+  moduleSlots: number
+  speedEffects: number[]
+  researchTimes: number[]
+}

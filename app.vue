@@ -18,6 +18,7 @@ const needs = computed(() => {
 })
 const manifest = useManifest(needs, recipes)
 const builders = await useBuilders()
+const science = await useScience()
 </script>
 
 <template>
@@ -34,6 +35,7 @@ const builders = await useBuilders()
     />
     <ManifestView :data="manifest" />
     builders: {{ builders }}
+    science: {{ science }}
   </div>
 </template>
 
