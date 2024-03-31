@@ -6,12 +6,25 @@ export async function useRecipes (): Promise<Ref<RecipeMap>> {
   
   setRecipes(contentJson, result.value)
   setResources(contentJson, result.value)
+  setHardcoded(result.value)
   
   for (const name of Object.keys(result.value)) {
     setFactors(name, result.value)
   }
 
   return result
+}
+
+function setHardcoded (recipeMap: RecipeMap) {
+  recipeMap['water'] = {
+    name: 'water',
+    ingredients: [],
+    resultCount: 1,
+    category: 'mining',
+    seconds: 1,
+    results: [{ name: 'water', count: 1 }],
+    factors: new Set(),
+  }
 }
 
 function setResources (contentJson: ParsedContent, recipeMap: RecipeMap) {
