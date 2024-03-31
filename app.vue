@@ -22,16 +22,27 @@ const config: Ref<FactoryConfig> = ref({
     'oil-mining': '',
     'oil-processing': '',
   },
+  extraItems: [
+    // {
+    //   name: 'construction-robot',
+    //   rate: 1,
+    // }
+  ],
 })
 
 const recipes = await useRecipes()
 const needs = computed(() => {
-  return config.value.sciencePacks.map((pack) => {
-    return {
+  const results = []
+  for (const pack of config.value.sciencePacks) {
+    results.push({
       name: pack,
       rate: 1
-    }
-  })
+    })
+  }
+  for (const item of config.value.extraItems) {
+    results.push(item)
+  }
+  return results
 })
 const manifest = useManifest(needs, recipes)
 const builders = await useBuilders()
