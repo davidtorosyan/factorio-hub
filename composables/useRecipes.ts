@@ -1,6 +1,6 @@
 import type { ParsedContent } from "@nuxt/content/types"
 
-const hardcoded = [
+const hardcodedIngredients = [
   'petroleum-gas',
   'light-oil',
   'heavy-oil',
@@ -23,7 +23,7 @@ export async function useRecipes (): Promise<Ref<RecipeMap>> {
 }
 
 function setHardcoded (recipeMap: RecipeMap) {
-  for (const name of hardcoded) {
+  for (const name of hardcodedIngredients) {
     recipeMap[name] = {
       name: name,
       ingredients: [],
@@ -33,6 +33,38 @@ function setHardcoded (recipeMap: RecipeMap) {
       results: [{ name: name, count: 1 }],
       factors: new Set(),
     }
+  }
+  recipeMap['space-science-pack'] = {
+    name: 'space-science-pack',
+    ingredients: [
+      {
+        name: 'rocket-launch',
+        count: 1,
+      },
+      {
+        name: 'satellite',
+        count: 1,
+      }
+    ],
+    resultCount: 1000,
+    category: 'special',
+    seconds: 1,
+    results: [{ name: 'space-science-pack', count: 1000 }],
+    factors: new Set(),
+  }
+  recipeMap['rocket-launch'] = {
+    name: 'rocket-launch',
+    ingredients: [
+      {
+        name: 'rocket-part',
+        count: 100,
+      },
+    ],
+    resultCount: 1,
+    category: 'special',
+    seconds: 1,
+    results: [{ name: 'rocket-launch', count: 1 }],
+    factors: new Set(),
   }
 }
 
