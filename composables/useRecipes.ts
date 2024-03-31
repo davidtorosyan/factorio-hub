@@ -26,6 +26,7 @@ function setResources (contentJson: ParsedContent, recipeMap: RecipeMap) {
     const name = nameJson
     const category = 'mining'
     const resultCount = 1
+    const results = [{ name, count: 1 }]
 
     // since we'll be multiplying times later, use 1 here as the unit value
     const seconds = 1
@@ -36,6 +37,7 @@ function setResources (contentJson: ParsedContent, recipeMap: RecipeMap) {
       resultCount,
       category,
       seconds,
+      results,
       factors: new Set(),
     }
   }
@@ -49,6 +51,7 @@ function setRecipes (contentJson: ParsedContent, recipeMap: RecipeMap) {
     const resultCountJson = recipeJson.result_count
     const energyJson = recipeJson.energy_required
     const categoryJson = recipeJson.category
+    const resultsJson = recipeJson.results
   
     if (typeof nameJson !== 'string') {
       continue
@@ -58,6 +61,7 @@ function setRecipes (contentJson: ParsedContent, recipeMap: RecipeMap) {
     const resultCount = convertNumber(resultCountJson) ?? 1
     const category = convertCategory(categoryJson)
     const seconds = convertNumber(energyJson) ?? 1
+    const results = convertResults(resultsJson) ?? [{ name, count: resultCount}]
 
     recipeMap[name] = {
       name,
@@ -65,6 +69,7 @@ function setRecipes (contentJson: ParsedContent, recipeMap: RecipeMap) {
       resultCount,
       category,
       seconds,
+      results,
       factors: new Set(),
     }
   }
@@ -90,17 +95,25 @@ function setFactors(name: string, recipeMap: RecipeMap) : Set<string> {
 }
 
 function convertIngredients(recipeJson: any) : Ingredient[] {
-  const ingredientsJson = recipeJson.ingredients
-  const normalJson = recipeJson.normal
+  return convertIngredientList(recipeJson.ingredients ?? recipeJson.normal.ingredients)
+}
+
+function convertResults(resultsJson: any) : Ingredient[] | undefined {
+  if (resultsJson === undefined) {
+    return undefined
+  }
+  return convertIngredientList(resultsJson)
+}
+
+function convertIngredientList(ingredientListJson: any) : Ingredient[] {
   const ingredients = []
 
-  const ingredientListJson = ingredientsJson ?? normalJson.ingredients
   for (const ingredientJson of ingredientListJson) {
-    const nameJson = ingredientJson[0]
+    const nameJson = ingredientJson.name ?? ingredientJson[0]
     if (typeof nameJson !== 'string') {
       continue
     }
-    const countJson = ingredientJson[1]
+    const countJson = ingredientJson.amount ?? ingredientJson[1]
 
     const name = nameJson
     const count = countJson

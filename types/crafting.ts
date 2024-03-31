@@ -12,6 +12,7 @@ type Recipe = {
   factors: Set<string>
   seconds: number
   category: RecipeCategory
+  results: Ingredient[]
 }
 
 type RecipeMap = {
