@@ -11,7 +11,7 @@ type Recipe = {
   resultCount: number,
   factors: Set<string>
   seconds: number
-  category: RecipeCategory
+  category: RecipeCategory | 'special'
   results: Ingredient[]
 }
 

@@ -1,5 +1,12 @@
 import type { ParsedContent } from "@nuxt/content/types"
 
+const hardcoded = [
+  'petroleum-gas',
+  'light-oil',
+  'heavy-oil',
+  'water',
+]
+
 export async function useRecipes (): Promise<Ref<RecipeMap>> {
   const contentJson = await queryContent('/data-raw').findOne()
   const result = ref({} as RecipeMap)
@@ -16,14 +23,16 @@ export async function useRecipes (): Promise<Ref<RecipeMap>> {
 }
 
 function setHardcoded (recipeMap: RecipeMap) {
-  recipeMap['water'] = {
-    name: 'water',
-    ingredients: [],
-    resultCount: 1,
-    category: 'mining',
-    seconds: 1,
-    results: [{ name: 'water', count: 1 }],
-    factors: new Set(),
+  for (const name of hardcoded) {
+    recipeMap[name] = {
+      name: name,
+      ingredients: [],
+      resultCount: 1,
+      category: 'special',
+      seconds: 1,
+      results: [{ name: name, count: 1 }],
+      factors: new Set(),
+    }
   }
 }
 
