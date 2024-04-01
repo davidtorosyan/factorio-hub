@@ -9,7 +9,7 @@ type Recipe = {
   name: string,
   ingredients: Ingredient[]
   resultCount: number,
-  factors: Set<string>
+  index: number | undefined
   seconds: number
   category: RecipeCategory | 'special'
   results: Ingredient[]

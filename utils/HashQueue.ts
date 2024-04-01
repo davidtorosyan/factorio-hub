@@ -7,6 +7,7 @@ export declare type Updater<Item> = (a: Item, b: Item) => void;
 
 export default class HashQueue<Item> {
   public length : number;
+  public data: Item[];
   private queue: TinyQueue<Item>;
   private map: Map<string, Item>;
   private keySelector: KeySelector<Item>;
@@ -14,6 +15,7 @@ export default class HashQueue<Item> {
   
   constructor (keySelector: KeySelector<Item>, updater: Updater<Item>, items? : Item[], compare? : Comparator<Item>) {
     this.queue = new TinyQueue([], compare);
+    this.data = this.queue.data;
     this.map = new Map();
 
     this.length = this.queue.length;
@@ -38,6 +40,7 @@ export default class HashQueue<Item> {
       this.map.delete(key);
     }
     this.length = this.queue.length;
+    this.data = this.queue.data;
     return item;
   }
 
@@ -51,6 +54,7 @@ export default class HashQueue<Item> {
       this.queue.push(item);
       this.map.set(key, item);
       this.length = this.queue.length;
+      this.data = this.queue.data;
       return true
     }
   }

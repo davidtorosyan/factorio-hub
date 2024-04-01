@@ -61,17 +61,11 @@ function getRecipeComparator(recipes: RecipeMap): Comparator<string> {
     const recipeB = recipes[b]
     if (recipeA === undefined || 
       recipeB === undefined || 
-      recipeA.factors === undefined || 
-      recipeB.factors === undefined) {
+      recipeA.index === undefined || 
+      recipeB.index === undefined) {
       return 0
     }
-    if (recipeA.factors.has(recipeB.name)) {
-      return -1
-    }
-    if (recipeB.factors.has(recipeA.name)) {
-      return 1
-    }
-    return recipeA.name.localeCompare(recipeB.name)
+    return recipeB.index - recipeA.index
   }
 }
 

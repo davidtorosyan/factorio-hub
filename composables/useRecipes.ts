@@ -15,8 +15,9 @@ export async function useRecipes (): Promise<Ref<RecipeMap>> {
   setResources(contentJson, result.value)
   setHardcoded(result.value)
   
+  const counter = {index: 0}
   for (const name of Object.keys(result.value)) {
-    setFactors(name, result.value)
+    setIndex(name, result.value, counter)
   }
 
   return result
@@ -31,7 +32,7 @@ function setHardcoded (recipeMap: RecipeMap) {
       category: 'special',
       seconds: 1,
       results: [{ name: name, count: 1 }],
-      factors: new Set(),
+      index: undefined,
     }
   }
   recipeMap['space-science-pack'] = {
@@ -50,7 +51,7 @@ function setHardcoded (recipeMap: RecipeMap) {
     category: 'special',
     seconds: 1,
     results: [{ name: 'space-science-pack', count: 1000 }],
-    factors: new Set(),
+    index: undefined,
   }
   recipeMap['rocket-launch'] = {
     name: 'rocket-launch',
@@ -64,7 +65,7 @@ function setHardcoded (recipeMap: RecipeMap) {
     category: 'special',
     seconds: 1,
     results: [{ name: 'rocket-launch', count: 1 }],
-    factors: new Set(),
+    index: undefined,
   }
 }
 
@@ -92,7 +93,7 @@ function setResources (contentJson: ParsedContent, recipeMap: RecipeMap) {
       category,
       seconds,
       results,
-      factors: new Set(),
+      index: undefined,
     }
   }
 }
@@ -124,28 +125,29 @@ function setRecipes (contentJson: ParsedContent, recipeMap: RecipeMap) {
       category,
       seconds,
       results,
-      factors: new Set(),
+      index: undefined,
     }
   }
 }
 
-function setFactors(name: string, recipeMap: RecipeMap) : Set<string> {
+function setIndex(name: string, recipeMap: RecipeMap, counter: {index: number}) : number | undefined {
   const recipe = recipeMap[name]
   if (!recipe) {
-    return new Set()
+    return undefined
   }
-  const factors = recipe.factors
-  if (factors.size > 0) {
-    return factors
+  if (recipe.index !== undefined) {
+    return recipe.index
   }
-
+  
+  let index = 0
   for (const ingredient of recipe.ingredients) {
-    factors.add(ingredient.name)
-    const ingredientFactors = setFactors(ingredient.name, recipeMap)
-    ingredientFactors.forEach(factor => factors.add(factor))
+    index += setIndex(ingredient.name, recipeMap, counter) ?? 0
   }
-
-  return factors
+  index += counter.index
+  counter.index += 1
+  
+  recipe.index = index
+  return index
 }
 
 function convertIngredients(recipeJson: any) : Ingredient[] {
