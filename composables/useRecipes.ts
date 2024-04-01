@@ -4,6 +4,7 @@ const hardcodedIngredients = [
   'petroleum-gas',
   'light-oil',
   'heavy-oil',
+  'solid-fuel',
   'water',
 ]
 
