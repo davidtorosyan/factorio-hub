@@ -4,7 +4,6 @@ const hardcodedIngredients = [
   'petroleum-gas',
   'light-oil',
   'heavy-oil',
-  'solid-fuel',
   'water',
 ]
 
@@ -66,6 +65,20 @@ function setHardcoded (recipeMap: RecipeMap) {
     category: 'special',
     seconds: 1,
     results: [{ name: 'rocket-launch', count: 1 }],
+    index: undefined,
+  }
+  recipeMap['solid-fuel'] = {
+    name: 'solid-fuel',
+    ingredients: [
+      {
+        name: 'light-oil',
+        count: 20,
+      },
+    ],
+    resultCount: 1,
+    category: 'special',
+    seconds: 2,
+    results: [{ name: 'solid-fuel', count: 1 }],
     index: undefined,
   }
 }
