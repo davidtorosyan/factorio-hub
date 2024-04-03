@@ -15,12 +15,12 @@ const config: Ref<FactoryConfig> = ref({
   speedEffect: 0,
   researchTime: 0,
   builders: {
-    'chemistry': '',
-    'assembly': '',
-    'smelting': '',
-    'mining': '',
-    'oil-mining': '',
-    'oil-processing': '',
+    'chemistry': 'chemical-plant',
+    'assembly': 'assembling-machine-2',
+    'smelting': 'electric-furnace',
+    'mining': 'electric-mining-drill',
+    'oil-mining': 'pumpjack',
+    'oil-processing': 'oil-refinery',
   },
   extraItems: [
     // {
