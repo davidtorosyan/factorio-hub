@@ -29,6 +29,7 @@ const config: Ref<FactoryConfig> = ref({
     // }
   ],
 })
+const builderChoice = computed(() => config.value.builders)
 
 const recipes = await useRecipes()
 const needs = computed(() => {
@@ -47,6 +48,7 @@ const needs = computed(() => {
 const manifest = useManifest(needs, recipes)
 const builders = await useBuilders()
 const science = await useScience()
+const plan = usePlan(manifest, builderChoice, recipes, builders)
 
 </script>
 
@@ -59,6 +61,7 @@ const science = await useScience()
       :data="criteria"
     />
 
+    Plan: {{ plan }}
     <ManifestView :data="manifest" />
   </div>
 </template>

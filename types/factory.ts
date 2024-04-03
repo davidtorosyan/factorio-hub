@@ -38,3 +38,15 @@ type FactoryConfig = {
   builders: BuilderChoice
   extraItems: ExtraItem[]
 }
+
+type FactoryPiece = {
+  name: string
+  rate: number
+  recipe: string
+  builder: string
+  count: number
+}
+
+type FactoryPlan = {
+  pieces: FactoryPiece[]
+}
