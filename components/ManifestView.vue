@@ -8,7 +8,7 @@ defineProps<{
 <template>
   <div class="grid">
     <div
-      v-for="target in data"
+      v-for="target in data.targets.values()"
       :key="target.name"
       class="col-3"
     >

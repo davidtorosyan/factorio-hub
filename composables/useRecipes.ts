@@ -14,11 +14,6 @@ export async function useRecipes (): Promise<Ref<RecipeMap>> {
   setRecipes(contentJson, result.value)
   setResources(contentJson, result.value)
   setHardcoded(result.value)
-  
-  const counter = {index: 0}
-  for (const name of Object.keys(result.value)) {
-    setIndex(name, result.value, counter)
-  }
 
   return result
 }
@@ -32,7 +27,6 @@ function setHardcoded (recipeMap: RecipeMap) {
       category: 'special',
       seconds: 1,
       results: [{ name: name, count: 1 }],
-      index: undefined,
     }
   }
   recipeMap['space-science-pack'] = {
@@ -51,7 +45,6 @@ function setHardcoded (recipeMap: RecipeMap) {
     category: 'special',
     seconds: 1,
     results: [{ name: 'space-science-pack', count: 1000 }],
-    index: undefined,
   }
   recipeMap['rocket-launch'] = {
     name: 'rocket-launch',
@@ -65,7 +58,6 @@ function setHardcoded (recipeMap: RecipeMap) {
     category: 'special',
     seconds: 1,
     results: [{ name: 'rocket-launch', count: 1 }],
-    index: undefined,
   }
   recipeMap['solid-fuel'] = {
     name: 'solid-fuel',
@@ -79,7 +71,6 @@ function setHardcoded (recipeMap: RecipeMap) {
     category: 'special',
     seconds: 2,
     results: [{ name: 'solid-fuel', count: 1 }],
-    index: undefined,
   }
 }
 
@@ -107,7 +98,6 @@ function setResources (contentJson: ParsedContent, recipeMap: RecipeMap) {
       category,
       seconds,
       results,
-      index: undefined,
     }
   }
 }
@@ -139,29 +129,8 @@ function setRecipes (contentJson: ParsedContent, recipeMap: RecipeMap) {
       category,
       seconds,
       results,
-      index: undefined,
     }
   }
-}
-
-function setIndex(name: string, recipeMap: RecipeMap, counter: {index: number}) : number | undefined {
-  const recipe = recipeMap[name]
-  if (!recipe) {
-    return undefined
-  }
-  if (recipe.index !== undefined) {
-    return recipe.index
-  }
-  
-  let index = 0
-  for (const ingredient of recipe.ingredients) {
-    index += setIndex(ingredient.name, recipeMap, counter) ?? 0
-  }
-  index += counter.index
-  counter.index += 1
-  
-  recipe.index = index
-  return index
 }
 
 function convertIngredients(recipeJson: any) : Ingredient[] {

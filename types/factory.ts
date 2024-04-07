@@ -42,7 +42,6 @@ type FactoryConfig = {
 type FactoryPiece = {
   name: string
   rate: number
-  recipe: string
   builder: string
   count: number
 }

@@ -13,8 +13,6 @@ defineProps<{
     <template #content>
       <p>Name: {{ data.name }}</p>
       <p>Rate: {{ data.rate }}</p>
-      <p>Category: {{ data.recipe.category }}</p>
-      <p>Result count: {{ data.recipe.resultCount }}</p>
     </template>
   </Card>
 </template>

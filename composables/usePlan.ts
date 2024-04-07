@@ -26,10 +26,9 @@ function computePlan(
   builderMap: BuilderMap) : FactoryPlan {
     const pieces = [] as FactoryPiece[]
 
-    for (const item of Object.keys(manifest)) {
-      const need = manifest[item]
-      const recipeName = need.recipe.name
-      const recipe = recipes[recipeName]
+    for (const target of manifest.targets.values()) {
+      const item = target.name
+      const recipe = recipes[item]
       if (recipe === undefined) {
         console.error(`Recipe not found for ${item}`)
         continue
@@ -46,13 +45,12 @@ function computePlan(
         continue
       }
 
-      const rate = need.rate
+      const rate = target.rate
       const count = Math.ceil(rate / recipe.resultCount * recipe.seconds * builder.speed)
 
       pieces.push({
         name: item,
         rate,
-        recipe: recipeName,
         builder: builderName,
         count,
       })

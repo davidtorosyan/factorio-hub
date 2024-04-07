@@ -1,6 +1,4 @@
-import type { Comparator } from "~/utils/HashQueue"
-
-export function useManifest (neededItems: Ref<Need[]>, recipes: Ref<RecipeMap>): Ref<Manifest> {
+export function useManifest (neededItems: Ref<Target[]>, recipes: Ref<RecipeMap>): Ref<Manifest> {
   const result = ref({} as Manifest)
 
   watchEffect(() => {
@@ -10,67 +8,35 @@ export function useManifest (neededItems: Ref<Need[]>, recipes: Ref<RecipeMap>):
   return result
 }
 
-function computeManifest(neededItems: Need[], recipes: RecipeMap) : Manifest {
-  const result = {} as Manifest
+function computeManifest(neededItems: Target[], recipes: RecipeMap) : Manifest {
+  const targets = new Map<string, Target>()
+  const result = {targets}
   
-  const queue = new HashQueue<Need>(a => a.name, (a, b) => a.rate += b.rate, [], getNeedComparator(recipes))
-  neededItems.forEach(item => queue.pushOrUpdate(item))
-  
-  while (queue.length > 0) {
-    const needed = queue.pop()
-    if (needed === undefined) {
-      continue
-    }
 
-    const name = needed.name
-    if (name in result) {
-      console.error(`Already processed ${name}`)
-      continue
-    }
-    
+  const orderedNames = topsort(
+    neededItems.map(a => a.name), 
+    name => recipes[name]?.ingredients.map(a => a.name) ?? []
+  );
+
+  const requested = new Map(neededItems.map(item => [item.name, item]));
+
+  for (const name of orderedNames) {    
     const recipe = recipes[name]
     if (recipe === undefined) {
       console.error(`Recipe not found for ${name}`)
       continue
     }
 
-    const ingredients = recipe.ingredients
-    const rate = needed.rate
+    const target = {name, rate: 0}
+    target.rate += requested.get(name)?.rate ?? 0
+    targets.set(name, target)
 
-    result[name] = {
-      name,
-      rate,
-      recipe,
-    }
-
-    for (const ingredient of ingredients) {
-      queue.pushOrUpdate({
-        name: ingredient.name,
-        rate: ingredient.count * rate
-      })
+    for (const ingredient of recipe.ingredients) {
+      const requestedIngredient = requested.get(ingredient.name) ?? {name: ingredient.name, rate: 0}
+      requestedIngredient.rate += ingredient.count * target.rate
+      requested.set(ingredient.name, requestedIngredient)
     }
   }
 
   return result
-}
-
-function getRecipeComparator(recipes: RecipeMap): Comparator<string> {
-  return (a, b) => {
-    const recipeA = recipes[a]
-    const recipeB = recipes[b]
-    if (recipeA === undefined || 
-      recipeB === undefined || 
-      recipeA.index === undefined || 
-      recipeB.index === undefined) {
-      return 0
-    }
-    return recipeB.index - recipeA.index
-  }
-}
-
-function getNeedComparator(recipes: RecipeMap): Comparator<Need> {
-  const recipeCompare = getRecipeComparator(recipes)
-  return (a, b) => {
-    return recipeCompare(a.name, b.name)
-  }
 }
