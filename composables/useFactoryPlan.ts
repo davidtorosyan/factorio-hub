@@ -8,12 +8,8 @@ export function useFactoryPlan (
     const content = toValue(factoryContent)
     const config = toValue(factoryConfig)
 
-    const targets = config.sciencePacks.map(pack => ({
-      name: pack,
-      rate: 1
-    })).concat(config.extraItems)
-
-    const manifest = computeManifest(toValue(targets), content.recipes)
+    const targets = computeTargets(config)
+    const manifest = computeManifest(targets, content.recipes)
     const pieces = computeFactoryPieces(
       manifest, 
       toValue(factoryConfig).builders, 

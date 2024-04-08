@@ -13,5 +13,9 @@ const model = defineModel<FactoryConfig>({ required: true })
     multiple
     aria-labelledby="multiple"
   />
+  Select labs: <InputNumber
+    v-model="model.labs"
+    show-buttons
+  />
 </template>
 

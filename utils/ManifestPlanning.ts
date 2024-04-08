@@ -1,12 +1,10 @@
-export function computeManifest(requestedTargets: Target[], recipes: RecipeMap) : Manifest {
+export function computeManifest(requestedTargets: Map<string, Target>, recipes: RecipeMap) : Manifest {
   const targets = new Map<string, Target>()
   
   const orderedNames = topsort(
-    requestedTargets.map(a => a.name), 
+    [...requestedTargets.keys()], 
     name => recipes[name]?.ingredients.map(a => a.name) ?? []
   );
-
-  const requested = new Map(requestedTargets.map(item => [item.name, item]));
 
   for (const name of orderedNames) {    
     const recipe = recipes[name]
@@ -16,13 +14,13 @@ export function computeManifest(requestedTargets: Target[], recipes: RecipeMap) 
     }
 
     const target = {name, rate: 0}
-    target.rate += requested.get(name)?.rate ?? 0
+    target.rate += requestedTargets.get(name)?.rate ?? 0
     targets.set(name, target)
 
     for (const ingredient of recipe.ingredients) {
-      const requestedIngredient = requested.get(ingredient.name) ?? {name: ingredient.name, rate: 0}
+      const requestedIngredient = requestedTargets.get(ingredient.name) ?? {name: ingredient.name, rate: 0}
       requestedIngredient.rate += ingredient.count * target.rate
-      requested.set(ingredient.name, requestedIngredient)
+      requestedTargets.set(ingredient.name, requestedIngredient)
     }
   }
 

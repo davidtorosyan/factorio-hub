@@ -1,6 +1,6 @@
 export function useFactoryConfig (): Ref<FactoryConfig> {
   return ref({
-    labs: 0,
+    labs: 1,
     sciencePacks: [],
     speedEffect: 0,
     researchTime: 0,
