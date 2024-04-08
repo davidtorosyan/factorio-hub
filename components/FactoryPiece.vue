@@ -4,6 +4,10 @@ defineProps<{
   data: FactoryPiece
 }>()
 
+function formatNumber(num: number) {
+  return num.toFixed(2)
+}
+
 </script>
 <template>
   <Card class="piece">
@@ -14,7 +18,7 @@ defineProps<{
       <p>Name: {{ data.name }}</p>
       <p>Builder: {{ data.builder }}</p>
       <p>Count: {{ data.count }}</p>
-      <p>Rate: {{ data.rate }}</p>
+      <p>Rate: {{ formatNumber(data.rate) }}</p>
     </template>
   </Card>
 </template>
