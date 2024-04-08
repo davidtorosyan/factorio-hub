@@ -24,8 +24,9 @@ export function computeFactoryPieces(
         continue
       }
 
-      const rate = target.rate
-      const count = Math.ceil(rate / recipe.resultCount * recipe.seconds * builder.speed)
+      const craftingRate = recipe.resultCount * builder.speed / recipe.seconds
+      const count = Math.ceil(target.rate / craftingRate)
+      const rate = count * craftingRate
 
       pieces.push({
         name: item,
