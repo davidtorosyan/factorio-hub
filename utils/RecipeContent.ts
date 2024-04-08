@@ -7,13 +7,12 @@ const hardcodedIngredients = [
   'water',
 ]
 
-export async function useRecipes (): Promise<Ref<RecipeMap>> {
-  const contentJson = await queryContent('/data-raw').findOne()
-  const result = ref({} as RecipeMap)
+export function getRecipes (contentJson: any): RecipeMap {
+  const result = {} as RecipeMap
   
-  setRecipes(contentJson, result.value)
-  setResources(contentJson, result.value)
-  setHardcoded(result.value)
+  setRecipes(contentJson, result)
+  setResources(contentJson, result)
+  setHardcoded(result)
 
   return result
 }

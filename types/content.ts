@@ -1,7 +1,4 @@
-type Ingredient = {
-  name: string
-  count: number
-}
+
 
 type RecipeCategory = 'assembly' | 'mining' | 'smelting' | 'oil-processing' | 'chemistry' | 'oil-mining'
 
@@ -18,11 +15,26 @@ type RecipeMap = {
   [key: string]: Recipe
 }
 
-type Target = {
+type Builder = {
   name: string
-  rate: number
+  category: RecipeCategory
+  speed: number
+  moduleSlots: number
 }
 
-type Manifest = {
-  targets: Map<string, Target>
+type BuilderMap = {
+  [key: string]: Builder
+}
+
+type Science = {
+  sciencePacks: string[]
+  moduleSlots: number
+  speedEffects: number[]
+  researchTimes: number[]
+}
+
+type FactoryContent = {
+  recipes: RecipeMap
+  builders: BuilderMap
+  science: Science
 }

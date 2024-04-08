@@ -1,12 +1,11 @@
 import type { ParsedContent } from "@nuxt/content/types"
 
-export async function useBuilders (): Promise<Ref<BuilderMap>> {
-  const contentJson = await queryContent('/data-raw').findOne()
-  const result = ref({} as BuilderMap)
+export function getBuilders (contentJson: any): BuilderMap {
+  const result = {} as BuilderMap
   
-  setAssemblingMachines(contentJson, result.value)
-  setFurnaces(contentJson, result.value)
-  setMiningDrills(contentJson, result.value)
+  setAssemblingMachines(contentJson, result)
+  setFurnaces(contentJson, result)
+  setMiningDrills(contentJson, result)
 
   return result
 }

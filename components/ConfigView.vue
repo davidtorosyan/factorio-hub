@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  data: FactoryCriteria
+  data: FactoryContent
 }>()
 
 const model = defineModel<FactoryConfig>({ required: true })

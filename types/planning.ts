@@ -1,24 +1,15 @@
-type Builder = {
+type Ingredient = {
   name: string
-  category: RecipeCategory
-  speed: number
-  moduleSlots: number
+  count: number
 }
 
-type BuilderMap = {
-  [key: string]: Builder
+type Target = {
+  name: string
+  rate: number
 }
 
-type Science = {
-  sciencePacks: string[]
-  moduleSlots: number
-  speedEffects: number[]
-  researchTimes: number[]
-}
-
-type FactoryCriteria = {
-  science: Science
-  builders: BuilderMap
+type Manifest = {
+  targets: Map<string, Target>
 }
 
 type BuilderChoice = {
@@ -48,4 +39,5 @@ type FactoryPiece = {
 
 type FactoryPlan = {
   pieces: FactoryPiece[]
+  manifest: Manifest
 }

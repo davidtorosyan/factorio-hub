@@ -1,29 +1,8 @@
-export function usePlan (
-  manifest: Ref<Manifest>, 
-  builderChoice: Ref<BuilderChoice>, 
-  recipes: Ref<RecipeMap>, 
-  builderMap: Ref<BuilderMap>
-): Ref<FactoryPlan> {
-
-  const result = ref({} as FactoryPlan)
-
-  watchEffect(() => {
-    result.value = computePlan(
-      toValue(manifest), 
-      toValue(builderChoice), 
-      toValue(recipes), 
-      toValue(builderMap),
-    )
-  })
-
-  return result
-}
-
-function computePlan(
+export function computeFactoryPieces(
   manifest: Manifest, 
   builderChoice: BuilderChoice, 
   recipes: RecipeMap, 
-  builderMap: BuilderMap) : FactoryPlan {
+  builderMap: BuilderMap) : FactoryPiece[] {
     const pieces = [] as FactoryPiece[]
 
     for (const target of manifest.targets.values()) {
@@ -56,7 +35,7 @@ function computePlan(
       })
     }
 
-    return {pieces}
+    return pieces
 }
 
 

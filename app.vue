@@ -2,53 +2,9 @@
 import 'primevue/resources/themes/aura-light-amber/theme.css'
 import 'primeflex/primeflex.css';
 
-const criteria = computed(() => {
-  return {
-    science: science.value,
-    builders: builders.value,
-  }
-})
-
-const config: Ref<FactoryConfig> = ref({
-  labs: 0,
-  sciencePacks: [],
-  speedEffect: 0,
-  researchTime: 0,
-  builders: {
-    'chemistry': 'chemical-plant',
-    'assembly': 'assembling-machine-2',
-    'smelting': 'electric-furnace',
-    'mining': 'electric-mining-drill',
-    'oil-mining': 'pumpjack',
-    'oil-processing': 'oil-refinery',
-  },
-  extraItems: [
-    // {
-    //   name: 'construction-robot',
-    //   rate: 1,
-    // }
-  ],
-})
-const builderChoice = computed(() => config.value.builders)
-
-const recipes = await useRecipes()
-const needs = computed(() => {
-  const results = []
-  for (const pack of config.value.sciencePacks) {
-    results.push({
-      name: pack,
-      rate: 1
-    })
-  }
-  for (const item of config.value.extraItems) {
-    results.push(item)
-  }
-  return results
-})
-const manifest = useManifest(needs, recipes)
-const builders = await useBuilders()
-const science = await useScience()
-const plan = usePlan(manifest, builderChoice, recipes, builders)
+const content = await useFactoryContent()
+const config = useFactoryConfig()
+const plan = useFactoryPlan(content, config)
 
 </script>
 
@@ -58,11 +14,11 @@ const plan = usePlan(manifest, builderChoice, recipes, builders)
 
     <ConfigView
       v-model="config"
-      :data="criteria"
+      :data="content"
     />
 
     Plan: {{ plan }}
-    <ManifestView :data="manifest" />
+    <ManifestView :data="plan.manifest" />
   </div>
 </template>
 

@@ -1,24 +1,12 @@
-export function useManifest (neededItems: Ref<Target[]>, recipes: Ref<RecipeMap>): Ref<Manifest> {
-  const result = ref({} as Manifest)
-
-  watchEffect(() => {
-    result.value = computeManifest(toValue(neededItems), toValue(recipes))
-  })
-
-  return result
-}
-
-function computeManifest(neededItems: Target[], recipes: RecipeMap) : Manifest {
+export function computeManifest(requestedTargets: Target[], recipes: RecipeMap) : Manifest {
   const targets = new Map<string, Target>()
-  const result = {targets}
   
-
   const orderedNames = topsort(
-    neededItems.map(a => a.name), 
+    requestedTargets.map(a => a.name), 
     name => recipes[name]?.ingredients.map(a => a.name) ?? []
   );
 
-  const requested = new Map(neededItems.map(item => [item.name, item]));
+  const requested = new Map(requestedTargets.map(item => [item.name, item]));
 
   for (const name of orderedNames) {    
     const recipe = recipes[name]
@@ -38,5 +26,5 @@ function computeManifest(neededItems: Target[], recipes: RecipeMap) : Manifest {
     }
   }
 
-  return result
+  return {targets}
 }

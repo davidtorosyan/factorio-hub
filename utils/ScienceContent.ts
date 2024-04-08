@@ -1,9 +1,7 @@
 
 import type { ParsedContent } from "@nuxt/content/types"
 
-export async function useScience (): Promise<Ref<Science>> {
-  const contentJson = await queryContent('/data-raw').findOne()
-  
+export function getScience (contentJson: any): Science { 
   const sciencePacks = getSciencePacks(contentJson)
   const moduleSlots = getModuleSlots(contentJson)
 
@@ -12,12 +10,12 @@ export async function useScience (): Promise<Ref<Science>> {
 
   const researchTimes = getResearchTimes(contentJson)
 
-  return ref({
+  return {
     sciencePacks,
     moduleSlots,
     speedEffects,
     researchTimes,
-  })
+  }
 }
 
 function convertToSpeedEffects (speedUpgrades: number[]): number[] {
