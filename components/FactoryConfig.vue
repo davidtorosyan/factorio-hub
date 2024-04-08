@@ -21,5 +21,9 @@ const model = defineModel<FactoryConfig>({ required: true })
     v-model="model.speedEffect"
     :options="data.science.speedEffects"
   />
+  Research time: <Dropdown
+    v-model="model.researchTime"
+    :options="data.science.researchTimes"
+  />
 </template>
 

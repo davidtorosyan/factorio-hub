@@ -3,7 +3,7 @@ import 'primevue/resources/themes/aura-light-amber/theme.css'
 import 'primeflex/primeflex.css';
 
 const content = await useFactoryContent()
-const config = useFactoryConfig()
+const config = useFactoryConfig(content)
 const plan = useFactoryPlan(content, config)
 
 </script>
