@@ -19,8 +19,8 @@ export function getScience (contentJson: any): Science {
 }
 
 function convertToSpeedEffects (speedUpgrades: number[]): number[] {
-  const results = []
   let total = 1
+  const results = [total]
   for (const speedUpgrade of speedUpgrades) {
     total += speedUpgrade
     results.push(total)

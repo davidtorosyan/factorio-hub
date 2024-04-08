@@ -12,7 +12,7 @@ export function computeTargets(config: FactoryConfig) : Map<string, Target> {
 }
 
 function getScienceTarget(name: string, config: FactoryConfig) : Target {
-  const rate = config.labs
+  const rate = config.labs * config.speedEffect
   return {name, rate}
 }
 

@@ -17,5 +17,9 @@ const model = defineModel<FactoryConfig>({ required: true })
     v-model="model.labs"
     show-buttons
   />
+  Speed: <Dropdown
+    v-model="model.speedEffect"
+    :options="data.science.speedEffects"
+  />
 </template>
 

@@ -2,7 +2,7 @@ export function useFactoryConfig (): Ref<FactoryConfig> {
   return ref({
     labs: 1,
     sciencePacks: [],
-    speedEffect: 0,
+    speedEffect: 1,
     researchTime: 0,
     builders: {
       'chemistry': 'chemical-plant',
