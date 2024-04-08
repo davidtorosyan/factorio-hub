@@ -1,0 +1,22 @@
+
+<script setup lang="ts">
+defineProps<{
+  data: FactoryPlan
+}>()
+
+</script>
+<template>
+  <span v-if="data.pieces.length > 0">
+    Factory:
+  </span>
+  <div class="grid">
+    <div
+      v-for="piece in data.pieces"
+      :key="piece.name"
+      class="col-3"
+    >
+      <FactoryPiece :data="piece" />
+    </div>
+  </div>
+</template>
+

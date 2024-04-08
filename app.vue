@@ -12,13 +12,12 @@ const plan = useFactoryPlan(content, config)
   <div>
     <h1>Factorio Planner</h1>
 
-    <ConfigView
+    <FactoryConfig
       v-model="config"
       :data="content"
     />
 
-    Plan: {{ plan }}
-    <ManifestView :data="plan.manifest" />
+    <FactoryPlan :data="plan" />
   </div>
 </template>
 
