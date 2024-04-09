@@ -12,9 +12,7 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [
-      imagetools({
-        include: 'assets\/img\/icons\/*',
-      })
+      imagetools()
     ]
   }
 })
