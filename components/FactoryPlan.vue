@@ -2,6 +2,7 @@
 <script setup lang="ts">
 defineProps<{
   data: FactoryPlan
+  images: Images,
 }>()
 
 </script>
@@ -15,7 +16,10 @@ defineProps<{
       :key="piece.name"
       class="col-3"
     >
-      <FactoryPiece :data="piece" />
+      <FactoryPiece
+        :data="piece"
+        :img="images.icons.get(piece.name) ?? ''"
+      />
     </div>
   </div>
 </template>

@@ -2,7 +2,7 @@
 import 'primevue/resources/themes/aura-light-amber/theme.css'
 import 'primeflex/primeflex.css';
 
-const icons = await useIcons()
+const images = await useImages()
 const content = await useFactoryContent()
 const config = useFactoryConfig(content)
 const plan = useFactoryPlan(content, config)
@@ -12,21 +12,16 @@ const plan = useFactoryPlan(content, config)
 <template>
   <div>
     <h1>Factorio Planner</h1>
-    <img
-      :src="icons.get('automation-science-pack')"
-      alt="automation-science-pack"
-    >
-    <img
-      :src="icons.get('logistic-science-pack')"
-      alt="logistic-science-pack"
-    >
 
     <FactoryConfig
       v-model="config"
       :data="content"
     />
 
-    <FactoryPlan :data="plan" />
+    <FactoryPlan
+      :data="plan"
+      :images="images"
+    />
   </div>
 </template>
 

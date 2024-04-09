@@ -1,7 +1,8 @@
 
 <script setup lang="ts">
 defineProps<{
-  data: FactoryPiece
+  data: FactoryPiece,
+  img: string,
 }>()
 
 function formatNumber(num: number) {
@@ -15,6 +16,10 @@ function formatNumber(num: number) {
       {{ data.name }}
     </template>
     <template #content>
+      <img
+        :src="img"
+        :alt="data.name"
+      >
       <p>Name: {{ data.name }}</p>
       <p>Builder: {{ data.builder }}</p>
       <p>Count: {{ data.count }}</p>

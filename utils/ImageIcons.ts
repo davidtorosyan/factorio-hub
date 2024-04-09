@@ -1,4 +1,4 @@
-export async function useIcons (): Promise<Map<string, string>> {
+export async function getIcons (): Promise<Map<string, string>> {
   const prefix = "/assets/img/icons/"
   const postfix = ".png"
 

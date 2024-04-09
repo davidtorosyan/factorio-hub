@@ -38,3 +38,7 @@ type FactoryContent = {
   builders: BuilderMap
   science: Science
 }
+
+type Images = {
+  icons: Map<string, string>
+}
