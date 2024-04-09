@@ -2,9 +2,7 @@
 import 'primevue/resources/themes/aura-light-amber/theme.css'
 import 'primeflex/primeflex.css';
 
-// @ts-expect-error
-import Image from '~/assets/img/icons/automation-science-pack.png?webp&w=64&h=64&position=left'
-
+const icons = await useIcons()
 const content = await useFactoryContent()
 const config = useFactoryConfig(content)
 const plan = useFactoryPlan(content, config)
@@ -15,8 +13,12 @@ const plan = useFactoryPlan(content, config)
   <div>
     <h1>Factorio Planner</h1>
     <img
-      :src="Image"
+      :src="icons.get('automation-science-pack')"
       alt="automation-science-pack"
+    >
+    <img
+      :src="icons.get('logistic-science-pack')"
+      alt="logistic-science-pack"
     >
 
     <FactoryConfig
