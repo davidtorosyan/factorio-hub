@@ -3,7 +3,7 @@ import 'primevue/resources/themes/aura-light-amber/theme.css'
 import 'primeflex/primeflex.css';
 
 // @ts-expect-error
-import Image from '~/assets/img/icons/automation-science-pack.png?webp'
+import Image from '~/assets/img/icons/automation-science-pack.png?webp&w=64&h=64&position=left'
 
 const content = await useFactoryContent()
 const config = useFactoryConfig(content)
