@@ -974,6 +974,9 @@ result.set('water-wube', image321)
 result.set('wood', image322)
 result.set('wooden-chest', image323)
 
+// overrides
+result.set('stone-wall', image320)
+
 export async function getIcons (): Promise<Map<string, string>> {
   return result
 }
