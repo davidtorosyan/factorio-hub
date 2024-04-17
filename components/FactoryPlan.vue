@@ -1,7 +1,7 @@
 
 <script setup lang="ts">
 defineProps<{
-  data: FactoryPlan
+  data: FactoryPlan,
   images: Images,
 }>()
 

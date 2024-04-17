@@ -16,6 +16,7 @@ const plan = useFactoryPlan(content, config)
     <FactoryConfig
       v-model="config"
       :data="content"
+      :images="images"
     />
 
     <FactoryPlan
