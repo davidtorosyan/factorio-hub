@@ -10,7 +10,7 @@ defineProps<{
   <div class="flex align-items-center gap-2">
     <Avatar
       :image="image ?? ''"
-      size="large"
+      size="normal"
       shape="circle"
     />
     <span class="font-bold">{{ name }}</span>
