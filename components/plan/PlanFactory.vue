@@ -16,7 +16,7 @@ defineProps<{
       :key="piece.name"
       class="col-3"
     >
-      <FactoryPiece
+      <PlanPiece
         :data="piece"
         :img="images.icons.get(piece.name) ?? ''"
       />

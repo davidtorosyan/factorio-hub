@@ -13,13 +13,13 @@ const plan = useFactoryPlan(content, config)
   <div>
     <h1>Factorio Planner</h1>
 
-    <FactoryConfig
+    <ConfigFactory
       v-model="config"
       :data="content"
       :images="images"
     />
 
-    <FactoryPlan
+    <PlanFactory
       :data="plan"
       :images="images"
     />
