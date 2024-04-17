@@ -8,7 +8,14 @@ const model = defineModel<FactoryConfig>({ required: true })
 
 </script>
 <template>
-  <Panel header="Science">
+  <Panel>
+    <template #header>
+      <ConfigBadge
+        name="Science"  
+        :image="images.custom.get('generic-science')"
+      />
+    </template>
+
     <SelectButton
       v-model="model.sciencePacks"
       :options="data.science.sciencePacks"

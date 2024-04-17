@@ -8,7 +8,14 @@ const model = defineModel<FactoryConfig>({ required: true })
 
 </script>
 <template>
-  <Panel header="Labs">
+  <Panel>
+    <template #header>
+      <ConfigBadge
+        name="Labs"  
+        :image="images.icons.get('lab')"
+      />
+    </template>
+
     Count: <InputNumber
       v-model="model.labs"
       show-buttons

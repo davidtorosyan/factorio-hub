@@ -41,4 +41,5 @@ type FactoryContent = {
 
 type Images = {
   icons: Map<string, string>
+  custom: Map<string, string>
 }
