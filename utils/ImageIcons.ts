@@ -1,3 +1,5 @@
+// ITEMS
+
 // @ts-expect-error
 import image000 from '~/assets/img/icons/accumulator.png?webp&w=64&h=64&position=left'
 // @ts-expect-error
@@ -647,7 +649,47 @@ import image322 from '~/assets/img/icons/wood.png?webp&w=64&h=64&position=left'
 // @ts-expect-error
 import image323 from '~/assets/img/icons/wooden-chest.png?webp&w=64&h=64&position=left'
 
+// FLUID
+
+// @ts-expect-error
+import image324 from '~/assets/img/icons/fluid/advanced-oil-processing.png?webp&w=64&h=64&position=left'
+// @ts-expect-error
+import image325 from '~/assets/img/icons/fluid/basic-oil-processing.png?webp&w=64&h=64&position=left'
+// @ts-expect-error
+import image326 from '~/assets/img/icons/fluid/coal-liquefaction.png?webp&w=64&h=64&position=left'
+// @ts-expect-error
+import image327 from '~/assets/img/icons/fluid/crude-oil.png?webp&w=64&h=64&position=left'
+// @ts-expect-error
+import image328 from '~/assets/img/icons/fluid/heavy-oil-cracking.png?webp&w=64&h=64&position=left'
+// @ts-expect-error
+import image329 from '~/assets/img/icons/fluid/heavy-oil.png?webp&w=64&h=64&position=left'
+// @ts-expect-error
+import image330 from '~/assets/img/icons/fluid/light-oil-cracking.png?webp&w=64&h=64&position=left'
+// @ts-expect-error
+import image331 from '~/assets/img/icons/fluid/light-oil.png?webp&w=64&h=64&position=left'
+// @ts-expect-error
+import image332 from '~/assets/img/icons/fluid/lubricant.png?webp&w=64&h=64&position=left'
+// @ts-expect-error
+import image333 from '~/assets/img/icons/fluid/petroleum-gas.png?webp&w=64&h=64&position=left'
+// @ts-expect-error
+import image334 from '~/assets/img/icons/fluid/steam.png?webp&w=64&h=64&position=left'
+// @ts-expect-error
+import image335 from '~/assets/img/icons/fluid/sulfuric-acid.png?webp&w=64&h=64&position=left'
+// @ts-expect-error
+import image336 from '~/assets/img/icons/fluid/water.png?webp&w=64&h=64&position=left'
+
+// BARRELING
+
+// @ts-expect-error
+import image337 from '~/assets/img/icons/fluid/barreling/barrel-empty.png?webp&w=64&h=64&position=left'
+// @ts-expect-error
+import image338 from '~/assets/img/icons/fluid/barreling/barrel-fill.png?webp&w=64&h=64&position=left'
+// @ts-expect-error
+import image339 from '~/assets/img/icons/fluid/barreling/empty-barrel.png?webp&w=64&h=64&position=left'
+
 const result = new Map<string, string>()
+
+// ITEMS
 
 result.set('accumulator', image000)
 result.set('advanced-circuit', image001)
@@ -973,6 +1015,28 @@ result.set('wall', image320)
 result.set('water-wube', image321)
 result.set('wood', image322)
 result.set('wooden-chest', image323)
+
+// FLUID
+
+result.set('advanced-oil-processing', image324)
+result.set('basic-oil-processing', image325)
+result.set('coal-liquefaction', image326)
+result.set('crude-oil', image327)
+result.set('heavy-oil-cracking', image328)
+result.set('heavy-oil', image329)
+result.set('light-oil-cracking', image330)
+result.set('light-oil', image331)
+result.set('lubricant', image332)
+result.set('petroleum-gas', image333)
+result.set('steam', image334)
+result.set('sulfuric-acid', image335)
+result.set('water', image336)
+
+// BARRELING
+
+result.set('barrel-empty', image337)
+result.set('barrel-fill', image338)
+result.set('empty-barrel', image339)
 
 // overrides
 result.set('stone-wall', image320)
