@@ -1,4 +1,5 @@
-import { Graph, alg } from "@dagrejs/graphlib"
+import pkg from '@dagrejs/graphlib';
+const { Graph, alg } = pkg;
 import TinyQueue from "tinyqueue";
 
 export function topsort(items: string[], getDeps: (id: string) => string[]): string[] {
