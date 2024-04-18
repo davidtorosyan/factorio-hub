@@ -8,7 +8,14 @@ const model = defineModel<FactoryConfig>({ required: true })
 
 </script>
 <template>
-  <Panel header="Factory Config">
+  <Panel>
+    <template #header>
+      <ConfigBadge
+        name="Config"  
+        :image="images.icons.get('iron-gear-wheel')"
+      />
+    </template>
+
     <ConfigScience
       v-model="model"
       :data="data"
