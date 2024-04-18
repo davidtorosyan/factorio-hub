@@ -22,10 +22,9 @@ defineProps<{
       >
         <PlanPiece
           :data="piece"
-          :img="images.icons.get(piece.name) ?? ''"
+          :images="images"
         />
       </div>
     </div>
   </Panel>
 </template>
-
