@@ -50,8 +50,5 @@ const model = defineModel<FactoryConfig>({ required: true })
     justify-content: space-between;
     align-items: center;
   }
-
-  .lab .p-inputgroup:not(:first-child) {
-    margin-left: 20px; 
-  }
 </style>
+

@@ -30,4 +30,8 @@ const plan = useFactoryPlan(content, config)
   body {
     background-color: var(--surface-ground)
   }
+
+  .p-panel {
+    background-color: var(--blue-50);
+  }
 </style>
