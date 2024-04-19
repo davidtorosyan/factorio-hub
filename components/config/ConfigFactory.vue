@@ -8,7 +8,7 @@ const model = defineModel<FactoryConfig>({ required: true })
 
 </script>
 <template>
-  <Panel>
+  <Panel class="config">
     <template #header>
       <ConfigBadge
         name="Config"  
@@ -28,3 +28,9 @@ const model = defineModel<FactoryConfig>({ required: true })
     />
   </Panel>
 </template>
+
+<style scoped>
+  .config {
+    width: 800px;
+  }
+</style>
