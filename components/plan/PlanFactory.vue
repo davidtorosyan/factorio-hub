@@ -18,7 +18,7 @@ defineProps<{
       <div
         v-for="piece in data.pieces"
         :key="piece.name"
-        class="col-3"
+        class="col-fixed"
       >
         <PlanPiece
           :data="piece"
