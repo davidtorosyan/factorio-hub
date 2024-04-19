@@ -27,6 +27,7 @@ const model = defineModel<FactoryConfig>({ required: true })
           class="p-button-label"
           :src="images.icons.get(slotProps.option) ?? ''"
           :alt="slotProps.option"
+          width="32"
         >
       </template>
     </SelectButton>
