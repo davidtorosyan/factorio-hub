@@ -1,6 +1,6 @@
 export function useFactoryPlan (
   factoryContent: Ref<FactoryContent>,
-  factoryConfig: Ref<FactoryConfig>,
+  factoryConfig: FactoryConfig,
   ): Ref<FactoryPlan> {
   const result = ref({} as FactoryPlan)
 

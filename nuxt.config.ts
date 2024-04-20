@@ -2,17 +2,24 @@ import { imagetools } from 'vite-imagetools'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
-  typescript: {
-    typeCheck: true
+  devtools: { 
+    enabled: true,
   },
-  modules: ['nuxt-primevue', "@nuxt/content"],
+  typescript: {
+    typeCheck: true,
+  },
+  modules: [
+    'nuxt-primevue', 
+    '@nuxt/content', 
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+  ],
   experimental: {
-    asyncContext: true
+    asyncContext: true,
   },
   vite: {
     plugins: [
-      imagetools()
+      imagetools(),
     ]
-  }
+  },
 })

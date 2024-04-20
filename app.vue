@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import 'primevue/resources/themes/aura-light-amber/theme.css'
-import 'primeflex/primeflex.css';
+import 'primeflex/primeflex.css'
 
 const images = await useImages()
 const content = await useFactoryContent()
-const config = useFactoryConfig(content)
+const config = useFactoryConfigStore()
 const plan = useFactoryPlan(content, config)
 
 </script>
