@@ -28,6 +28,7 @@ type FactoryConfig = {
   researchTime: number
   builders: BuilderChoice
   extraItems: ExtraItem[]
+  ready: boolean
 }
 
 type FactoryPiece = {

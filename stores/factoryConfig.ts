@@ -17,11 +17,17 @@ export const defaultFactoryConfig: FactoryConfig = {
     //   rate: 1,
     // }
   ],
+  ready: false,
 }
 
 export const useFactoryConfigStore = defineStore('configStore', {
   state: () => defaultFactoryConfig,
   persist: {
     storage: persistedState.localStorage,
+    afterRestore: (ctx) => {
+      setTimeout(() => {
+        ctx.store.ready = true
+      }, 0)
+    },
   },
 })

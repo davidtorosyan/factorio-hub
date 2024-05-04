@@ -2,7 +2,7 @@
 defineProps<{
   data: FactoryContent,
   images: Images,
-  reset: () => void
+  reset: () => void,
 }>()
 
 const model = defineModel<FactoryConfig>({ required: true })
@@ -23,16 +23,18 @@ const model = defineModel<FactoryConfig>({ required: true })
       </ConfigBadge>
     </template>
 
-    <ConfigScience
-      v-model="model"
-      :data="data"
-      :images="images"
-    />
-    <ConfigLab
-      v-model="model"
-      :data="data"
-      :images="images"
-    />
+    <div v-if="model.ready">
+      <ConfigScience
+        v-model="model"
+        :data="data"
+        :images="images"
+      />
+      <ConfigLab
+        v-model="model"
+        :data="data"
+        :images="images"
+      />
+    </div>
   </Panel>
 </template>
 
