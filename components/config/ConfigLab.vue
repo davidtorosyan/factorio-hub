@@ -22,6 +22,8 @@ const model = defineModel<FactoryConfig>({ required: true })
         <InputNumber
           v-model="model.labs"
           show-buttons
+          :min="0"
+          :max="9999"
         />
       </InputGroup>
 
