@@ -17,6 +17,7 @@ const plan = useFactoryPlan(content, config)
       v-model="config"
       :data="content"
       :images="images"
+      :reset="() => config.$reset()"
     />
 
     <PlanFactory

@@ -14,5 +14,6 @@ defineProps<{
       shape="circle"
     />
     <span class="font-bold">{{ name }}</span>
+    <slot />
   </div>
 </template>

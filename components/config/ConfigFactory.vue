@@ -2,6 +2,7 @@
 defineProps<{
   data: FactoryContent,
   images: Images,
+  reset: () => void
 }>()
 
 const model = defineModel<FactoryConfig>({ required: true })
@@ -13,7 +14,13 @@ const model = defineModel<FactoryConfig>({ required: true })
       <ConfigBadge
         name="Config"  
         :image="images.icons.get('iron-gear-wheel')"
-      />
+      >
+        <Button
+          label="[reset]"
+          link
+          @click="reset()"
+        />
+      </ConfigBadge>
     </template>
 
     <ConfigScience
