@@ -23,7 +23,26 @@ const model = defineModel<FactoryConfig>({ required: true })
         <Dropdown
           v-model="model.builders.assembly"
           :options="data.builderOptions.assembly"
-        />
+        >
+          <template #value="slotProps">
+            <div class="flex align-items-center">
+              <img
+                :alt="slotProps.value"
+                :src="images.icons.get(slotProps.value) ?? ''"
+                width="32px"
+              >
+            </div>
+          </template>
+          <template #option="slotProps">
+            <div class="flex align-items-center">
+              <img
+                :alt="slotProps.option"
+                :src="images.icons.get(slotProps.option) ?? ''"
+                width="32px"
+              >
+            </div>
+          </template>
+        </Dropdown>
       </InputGroup>
     </div>
   </Panel>
