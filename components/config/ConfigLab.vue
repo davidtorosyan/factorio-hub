@@ -17,15 +17,12 @@ const model = defineModel<FactoryConfig>({ required: true })
     </template>
 
     <div class="lab">
-      <InputGroup>
-        <InputGroupAddon>Count</InputGroupAddon>
-        <InputNumber
-          v-model="model.labs"
-          show-buttons
-          :min="0"
-          :max="9999"
-        />
-      </InputGroup>
+      <InputNumber
+        v-model="model.labs"
+        show-buttons
+        :min="1"
+        :max="9999"
+      />
 
       <InputGroup>
         <InputGroupAddon>Speed</InputGroupAddon>
