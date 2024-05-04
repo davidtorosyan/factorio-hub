@@ -26,6 +26,10 @@ type BuilderMap = {
   [key: string]: Builder
 }
 
+type BuilderOptions = {
+  [key in RecipeCategory]: string[]
+}
+
 type Science = {
   sciencePacks: string[]
   moduleSlots: number
@@ -36,6 +40,7 @@ type Science = {
 type FactoryContent = {
   recipes: RecipeMap
   builders: BuilderMap
+  builderOptions: BuilderOptions
   science: Science
 }
 

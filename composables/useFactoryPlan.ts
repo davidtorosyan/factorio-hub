@@ -12,7 +12,7 @@ export function useFactoryPlan (
     const manifest = computeManifest(targets, content.recipes)
     const pieces = computeFactoryPieces(
       manifest, 
-      toValue(factoryConfig).builders, 
+      config.builders, 
       content.recipes, 
       content.builders
     )
