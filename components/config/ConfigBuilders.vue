@@ -18,38 +18,52 @@ const model = defineModel<FactoryConfig>({ required: true })
     </template>
 
     <div class="builders">
-      <InputGroup>
-        <InputGroupAddon>Assembly</InputGroupAddon>
-        <Dropdown
+      <div>
+        <ConfigPicker
           v-model="model.builders.assembly"
+          name="Assembly"
           :options="data.builderOptions.assembly"
-        >
-          <template #value="slotProps">
-            <div class="flex align-items-center">
-              <img
-                :alt="slotProps.value"
-                :src="images.icons.get(slotProps.value) ?? ''"
-                width="32px"
-              >
-            </div>
-          </template>
-          <template #option="slotProps">
-            <div class="flex align-items-center">
-              <img
-                :alt="slotProps.option"
-                :src="images.icons.get(slotProps.option) ?? ''"
-                width="32px"
-              >
-            </div>
-          </template>
-        </Dropdown>
-      </InputGroup>
+          :images="images"
+        />
+        <ConfigPicker
+          v-model="model.builders.mining"
+          name="Mining"
+          :options="data.builderOptions.mining"
+          :images="images"
+        />
+        <ConfigPicker
+          v-model="model.builders.smelting"
+          name="Smelting"
+          :options="data.builderOptions.smelting"
+          :images="images"
+        />
+      </div>
+      <div>
+        <ConfigPicker
+          v-model="model.builders.chemistry"
+          name="Chemistry"
+          :options="data.builderOptions.chemistry"
+          :images="images"
+        />
+        <ConfigPicker
+          v-model="model.builders['oil-mining']"
+          name="Oil mining"
+          :options="data.builderOptions['oil-mining']"
+          :images="images"
+        />
+        <ConfigPicker
+          v-model="model.builders['oil-processing']"
+          name="Oil processing"
+          :options="data.builderOptions['oil-processing']"
+          :images="images"
+        />
+      </div>
     </div>
   </Panel>
 </template>
 
 <style scoped>
-  .builders {
+  .builders > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
