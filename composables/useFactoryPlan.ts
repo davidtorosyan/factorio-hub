@@ -14,7 +14,8 @@ export function useFactoryPlan (
       manifest, 
       config.builders, 
       content.recipes, 
-      content.builders
+      content.builders,
+      config.oilFieldEfficiency,
     )
 
     result.value = {

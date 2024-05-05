@@ -58,6 +58,19 @@ const model = defineModel<FactoryConfig>({ required: true })
           :images="images"
         />
       </div>
+      <div>
+        <InputGroup>
+          <InputGroupAddon>Oil Field Efficiency</InputGroupAddon>
+          <InputNumber
+            v-model="model.oilFieldEfficiency"
+            suffix="%"
+            :use-grouping="false"
+            :min="1"
+            :max="9999"
+            :step="100"
+          />
+        </InputGroup>
+      </div>
     </div>
   </Panel>
 </template>

@@ -83,7 +83,7 @@ function setResources (contentJson: ParsedContent, recipeMap: RecipeMap) {
     }
 
     const name = nameJson
-    const category = 'mining'
+    const category = name === 'crude-oil' ? 'oil-mining' : 'mining'
     const resultCount = 1
     const results = [{ name, count: 1 }]
 

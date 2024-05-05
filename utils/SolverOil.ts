@@ -1,34 +1,46 @@
-type SolverOilInput = {
-  petrolRate: number
-  heavyOilRate: number
-  lightOilRate: number
+export function computeOil(manifest: Manifest, recipes: RecipeMap): SolverOilOutput {
+  const config = buildConfig(recipes)
+  const input = buildInput(manifest)
+  return solveOil(input, config)
 }
 
-type SolverOilConfig = {
-  advancedOilConfig: {
-    crudeRate: number
-    petrolRate: number
-    lightOilRate: number
-    heavyOilRate: number
-  }
-  heavyCrackingConfig: {
-    heavyOilRate: number
-    lightOilRate: number
-  }
-  lightCrackingConfig: {
-    lightOilRate: number
-    petrolRate: number
+function findCount(ingredients: Ingredient[], name: string): number {
+  return ingredients.find(i => i.name === name)?.count ?? 0
+}
+
+function findTarget(manifest: Manifest, name: string): number {
+  return manifest.targets.get(name)?.rate ?? 0
+}
+
+function buildInput(manifest: Manifest): SolverOilInput {
+  return {
+    petrolRate: findTarget(manifest, 'petroleum-gas'),
+    heavyOilRate: findTarget(manifest, 'heavy-oil'),
+    lightOilRate: findTarget(manifest, 'light-oil'),
   }
 }
 
-type SolverOilOutput = {
-  crudeRate: number
-  petrolRate: number
-  heavyOilRate: number
-  lightOilRate: number
-  advancedOilCount: number
-  heavyCrackingCount: number
-  lightCrackingCount: number
+function buildConfig(recipes: RecipeMap): SolverOilConfig {
+  const advancedOilRecipe = recipes['advanced-oil-processing']
+  const heavyCrackingRecipe = recipes['heavy-oil-cracking']
+  const lightCrackingRecipe = recipes['light-oil-cracking']
+
+  return {
+    advancedOilConfig: {
+      crudeRate: findCount(advancedOilRecipe.ingredients, 'crude-oil'),
+      petrolRate: findCount(advancedOilRecipe.results, 'petroleum-gas'),
+      lightOilRate: findCount(advancedOilRecipe.results, 'light-oil'),
+      heavyOilRate: findCount(advancedOilRecipe.results, 'heavy-oil'),
+    },
+    heavyCrackingConfig: {
+      heavyOilRate: findCount(heavyCrackingRecipe.ingredients, 'heavy-oil'),
+      lightOilRate: findCount(heavyCrackingRecipe.results, 'light-oil'),
+    },
+    lightCrackingConfig: {
+      lightOilRate: findCount(lightCrackingRecipe.ingredients, 'light-oil'),
+      petrolRate: findCount(lightCrackingRecipe.results, 'petroleum-gas'),
+    },
+  }
 }
 
 function solveOil(input: SolverOilInput, config: SolverOilConfig): SolverOilOutput {

@@ -3,6 +3,7 @@ export const defaultFactoryConfig: FactoryConfig = {
   sciencePacks: [],
   speedEffect: 1,
   researchTime: 5,
+  oilFieldEfficiency: 1000,
   builders: {
     'chemistry': 'chemical-plant',
     'assembly': 'assembling-machine-2',
