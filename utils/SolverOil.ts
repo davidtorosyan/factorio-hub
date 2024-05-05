@@ -51,7 +51,7 @@ function solveOil(input: SolverOilInput, config: SolverOilConfig): SolverOilOutp
     config.lightCrackingConfig.petrolRate / 
     config.lightCrackingConfig.lightOilRate
 
-  const advancedOilCount = 
+  const advancedOilCount = Math.max(0, Math.ceil(
     (
       input.lightOilRate + 
       (yieldLight * input.heavyOilRate) + 
@@ -62,20 +62,24 @@ function solveOil(input: SolverOilInput, config: SolverOilConfig): SolverOilOutp
       (yieldLight * config.advancedOilConfig.heavyOilRate) + 
       (yieldPetrol * config.advancedOilConfig.petrolRate)
     )
+  ))
 
-  const heavyCrackingCount = 
-  (
-    advancedOilCount * config.advancedOilConfig.heavyOilRate - 
-    input.heavyOilRate
-  ) / 
-  config.heavyCrackingConfig.heavyOilRate
+  const heavyCrackingCount = Math.max(0, Math.ceil(
+    (
+      advancedOilCount * config.advancedOilConfig.heavyOilRate - 
+      input.heavyOilRate
+    ) / 
+    config.heavyCrackingConfig.heavyOilRate
+  ))
   
 
-  const lightCrackingCount = (
-    input.petrolRate - 
-    advancedOilCount * config.advancedOilConfig.petrolRate
-  ) /
-  config.lightCrackingConfig.petrolRate
+  const lightCrackingCount = Math.max(0, Math.ceil(
+    (
+      input.petrolRate - 
+      advancedOilCount * config.advancedOilConfig.petrolRate
+    ) /
+    config.lightCrackingConfig.petrolRate
+  ))
 
   const crudeRate = advancedOilCount * config.advancedOilConfig.crudeRate
 

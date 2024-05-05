@@ -53,30 +53,24 @@ export function computeFactoryPieces(
 function addOilPieces(pieces: FactoryPiece[], solverOilOutput: SolverOilOutput, builderChoice: BuilderChoice) {
 
   const oilPieces: FactoryPiece[] = [
-    // {
-    //   name: 'crude-oil',
-    //   rate: solverOilOutput.crudeRate,
-    //   builder: oilMiningBuilder,
-    //   count: solverOilOutput.crudeRate,
-    // },
-    // {
-    //   name: 'petroleum-gas',
-    //   rate: solverOilOutput.petrolRate,
-    //   builder: builderChoice['chemistry'],
-    //   count: solverOilOutput.advancedOilCount,
-    // },
-    // {
-    //   name: 'heavy-oil',
-    //   rate: solverOilOutput.heavyOilRate,
-    //   builder: builderChoice['chemistry'],
-    //   count: solverOilOutput.heavyCrackingCount,
-    // },
-    // {
-    //   name: 'light-oil',
-    //   rate: solverOilOutput.lightOilRate,
-    //   builder: 'chemical-plant',
-    //   count: solverOilOutput.lightCrackingCount,
-    // },
+    {
+      name: 'advanced-oil-processing',
+      rate: solverOilOutput.heavyOilRate,
+      builder: builderChoice['oil-processing'],
+      count: solverOilOutput.advancedOilCount,
+    },
+    {
+      name: 'heavy-oil-cracking',
+      rate: solverOilOutput.lightOilRate,
+      builder: builderChoice['chemistry'],
+      count: solverOilOutput.heavyCrackingCount,
+    },
+    {
+      name: 'light-oil-cracking',
+      rate: solverOilOutput.petrolRate,
+      builder: builderChoice['chemistry'],
+      count: solverOilOutput.lightCrackingCount,
+    },
   ]
 
   pieces.push(...oilPieces)
