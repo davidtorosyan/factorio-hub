@@ -11,6 +11,7 @@ export const defaultFactoryConfig: FactoryConfig = {
     'mining': 'electric-mining-drill',
     'oil-mining': 'pumpjack',
     'oil-processing': 'oil-refinery',
+    'launch': 'rocket-silo',
   },
   extraItems: [
     // {

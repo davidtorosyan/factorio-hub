@@ -41,7 +41,7 @@ function setHardcoded (recipeMap: RecipeMap) {
       }
     ],
     resultCount: 1000,
-    category: 'special',
+    category: 'launch',
     seconds: 1,
     results: [{ name: 'space-science-pack', count: 1000 }],
   }

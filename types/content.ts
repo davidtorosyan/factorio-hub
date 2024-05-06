@@ -1,6 +1,6 @@
 
 
-type RecipeCategory = 'assembly' | 'mining' | 'smelting' | 'oil-processing' | 'chemistry' | 'oil-mining'
+type RecipeCategory = 'assembly' | 'mining' | 'smelting' | 'oil-processing' | 'chemistry' | 'oil-mining' | 'launch'
 
 type Recipe = {
   name: string,

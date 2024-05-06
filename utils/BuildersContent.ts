@@ -6,8 +6,18 @@ export function getBuilders (contentJson: any): BuilderMap {
   setAssemblingMachines(contentJson, result)
   setFurnaces(contentJson, result)
   setMiningDrills(contentJson, result)
+  setCustomBuilders(result)
 
   return result
+}
+
+function setCustomBuilders (builderMap: BuilderMap) {
+  builderMap['rocket-silo'] = {
+    name: 'rocket-silo',
+    category: 'launch',
+    speed: 1,
+    moduleSlots: 0,
+  }
 }
 
 function setAssemblingMachines (contentJson: ParsedContent, builderMap: BuilderMap) {
