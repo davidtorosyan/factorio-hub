@@ -1,6 +1,7 @@
 export function computeTargets(config: FactoryConfig) : Map<string, Target> {
   const scienceTargets = config.sciencePacks.map(name => getScienceTarget(name, config))
-  const targets = scienceTargets.concat(config.extraItems)
+  const extraItems = config.extraItems.map(resolveExtraItem).filter(item => item !== undefined) as Target[]
+  const targets = scienceTargets.concat(extraItems)
 
   const rateUpdater = (existing: Target, value: Target) => existing.rate += value.rate
   const results = new Map<string, Target>()
@@ -9,6 +10,13 @@ export function computeTargets(config: FactoryConfig) : Map<string, Target> {
   }
 
   return results
+}
+
+function resolveExtraItem(item: ExtraItem) : Target | undefined {
+  if (item.name === undefined || item.rate === undefined || item.rate === 0) {
+    return undefined
+  }
+  return {name: item.name, rate: item.rate}
 }
 
 function getScienceTarget(name: string, config: FactoryConfig) : Target {

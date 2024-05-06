@@ -34,6 +34,11 @@ const model = defineModel<FactoryConfig>({ required: true })
         :data="data"
         :images="images"
       />
+      <ConfigExtras
+        v-model="model"
+        :data="data"
+        :images="images"
+      />
       <ConfigBuilders
         v-model="model"
         :data="data"

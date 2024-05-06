@@ -17,8 +17,8 @@ type BuilderChoice = {
 }
 
 type ExtraItem = {
-  name: string
-  rate: number
+  name: string | undefined
+  rate: number | undefined
 }
 
 type FactoryConfig = {
