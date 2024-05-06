@@ -42,6 +42,7 @@ export function computeFactoryPieces(
         rate,
         builder: builderName,
         count,
+        result: undefined,
       })
     }
 
@@ -58,18 +59,21 @@ function addOilPieces(pieces: FactoryPiece[], solverOilOutput: SolverOilOutput, 
       rate: solverOilOutput.heavyOilRate,
       builder: builderChoice['oil-processing'],
       count: solverOilOutput.advancedOilCount,
+      result: 'heavy-oil',
     },
     {
       name: 'heavy-oil-cracking',
       rate: solverOilOutput.lightOilRate,
       builder: builderChoice['chemistry'],
       count: solverOilOutput.heavyCrackingCount,
+      result: 'light-oil',
     },
     {
       name: 'light-oil-cracking',
       rate: solverOilOutput.petrolRate,
       builder: builderChoice['chemistry'],
       count: solverOilOutput.lightCrackingCount,
+      result: 'petroleum-gas',
     },
   ]
 

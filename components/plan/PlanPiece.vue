@@ -29,7 +29,15 @@ function formatNumber(num: number) {
             width="24"
           >
         </p>
-        <p>{{ formatNumber(data.rate) }} / sec</p>
+        <p>
+          <img
+            v-if="data.result !== undefined"
+            :src="images.icons.get(data.result) ?? ''"
+            :alt="data.result"
+            width="24"
+          >
+          {{ formatNumber(data.rate) }} / sec
+        </p>
       </div>
     </template>
   </Card>

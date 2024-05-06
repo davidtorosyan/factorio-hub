@@ -37,6 +37,7 @@ type FactoryPiece = {
   rate: number
   builder: string
   count: number
+  result: string | undefined
 }
 
 type FactoryPlan = {
