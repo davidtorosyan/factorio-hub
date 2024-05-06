@@ -35,7 +35,7 @@ export function computeFactoryPieces(
       const modifier = item == 'crude-oil' ? (oilFieldEfficiency / 10) : 1
       const craftingRate = recipe.resultCount * builder.speed * modifier / recipe.seconds
       const count = Math.ceil(target.rate / craftingRate)
-      const rate = count * craftingRate
+      const rate = recipe.category === 'launch' ? target.rate : count * craftingRate
 
       pieces.push({
         name: item,
