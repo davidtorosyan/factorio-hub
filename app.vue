@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import 'primevue/resources/themes/aura-light-amber/theme.css'
 import 'primeflex/primeflex.css'
+import 'primeicons/primeicons.css'
 
 const images = await useImages()
 const content = await useFactoryContent()

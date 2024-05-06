@@ -46,7 +46,8 @@ const model = defineModel<ExtraItem>({ required: true })
       :max="9999"
     />
     <Button
-      label="X"
+      icon="pi pi-times"
+      aria-label="remove" 
       @click="remove()"
     />
   </InputGroup>

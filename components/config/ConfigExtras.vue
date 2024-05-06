@@ -13,13 +13,23 @@ const model = defineModel<FactoryConfig>({ required: true })
       <ConfigBadge
         name="Extras"  
         :image="images.icons.get('construction-robot')"
-      />
+      >
+        <Button
+          class="add-button"
+          icon="pi pi-plus"
+          aria-label="add" 
+          @click="model.extraItems.push({ name: undefined, rate: 1 })"
+        />
+
+        <Button
+          label="[reset]"
+          link
+          @click="model.extraItems = []"
+        />
+      </ConfigBadge>
     </template>
 
-    <Button
-      label="+"
-      @click="model.extraItems.push({ name: undefined, rate: 1 })"
-    />
+
 
     <div class="grid">
       <div
@@ -39,6 +49,11 @@ const model = defineModel<FactoryConfig>({ required: true })
 </template>
 
 <style scoped>
+  .add-button {
+    width: 25px;
+    height: 25px;
+  }
+  
   .extras {
     display: flex;
     justify-content: space-between;
