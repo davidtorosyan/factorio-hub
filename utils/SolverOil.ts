@@ -83,18 +83,21 @@ function solveOil(input: SolverOilInput, config: SolverOilConfig): SolverOilOutp
 
   const crudeRate = advancedOilCount * config.advancedOilConfig.crudeRate
 
-  const petrolRate = 
+  const petrolRate = Math.max(input.petrolRate,
     advancedOilCount * config.advancedOilConfig.petrolRate +
     lightCrackingCount * config.lightCrackingConfig.petrolRate
+  )
 
-  const lightOilRate = 
+  const lightOilRate = Math.max(input.lightOilRate,
     advancedOilCount * config.advancedOilConfig.lightOilRate +
     heavyCrackingCount * config.heavyCrackingConfig.lightOilRate -
     lightCrackingCount * config.lightCrackingConfig.lightOilRate
+  )
 
-  const heavyOilRate = 
+  const heavyOilRate = Math.max(input.heavyOilRate,
       advancedOilCount * config.advancedOilConfig.heavyOilRate -
       heavyCrackingCount * config.heavyCrackingConfig.heavyOilRate
+  )
 
   return {
     crudeRate,
