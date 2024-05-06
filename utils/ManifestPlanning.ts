@@ -17,9 +17,11 @@ export function computeManifest(requestedTargets: Map<string, Target>, recipes: 
     target.rate += requestedTargets.get(name)?.rate ?? 0
     targets.set(name, target)
 
+    const runRate = target.rate / recipe.resultCount
+
     for (const ingredient of recipe.ingredients) {
       const requestedIngredient = requestedTargets.get(ingredient.name) ?? {name: ingredient.name, rate: 0}
-      requestedIngredient.rate += ingredient.count * target.rate
+      requestedIngredient.rate += ingredient.count * runRate
       requestedTargets.set(ingredient.name, requestedIngredient)
     }
   }
