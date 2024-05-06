@@ -52,6 +52,9 @@ export function computeFactoryPieces(
 }
 
 function addOilPieces(pieces: FactoryPiece[], solverOilOutput: SolverOilOutput, builderChoice: BuilderChoice) {
+  if (solverOilOutput.advancedOilCount == 0) {
+    return
+  }
 
   const oilPieces: FactoryPiece[] = [
     {
