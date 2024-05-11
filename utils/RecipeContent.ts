@@ -106,8 +106,9 @@ function setRecipes (contentJson: ParsedContent, recipeMap: RecipeMap) {
 
   for (const recipeJson of Object.values(recipesJson) as any[]) {
     const nameJson = recipeJson.name
+    const ingredientsJson = recipeJson.ingredients ?? recipeJson.normal?.ingredients
     const resultCountJson = recipeJson.result_count
-    const energyJson = recipeJson.energy_required
+    const energyJson = recipeJson.energy_required ?? recipeJson.normal?.energy_required
     const categoryJson = recipeJson.category
     const resultsJson = recipeJson.results
   
@@ -115,10 +116,10 @@ function setRecipes (contentJson: ParsedContent, recipeMap: RecipeMap) {
       continue
     }
     const name = nameJson
-    const ingredients = convertIngredients(recipeJson)
+    const ingredients = convertIngredientList(ingredientsJson)
     const resultCount = convertNumber(resultCountJson) ?? 1
     const category = convertCategory(categoryJson)
-    const seconds = convertNumber(energyJson) ?? 1
+    const seconds = convertNumber(energyJson) ?? 0.5
     const results = convertResults(resultsJson) ?? [{ name, count: resultCount}]
 
     recipeMap[name] = {
@@ -130,10 +131,6 @@ function setRecipes (contentJson: ParsedContent, recipeMap: RecipeMap) {
       results,
     }
   }
-}
-
-function convertIngredients(recipeJson: any) : Ingredient[] {
-  return convertIngredientList(recipeJson.ingredients ?? recipeJson.normal.ingredients)
 }
 
 function convertResults(resultsJson: any) : Ingredient[] | undefined {
