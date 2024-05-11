@@ -12,6 +12,9 @@ const plan = useFactoryPlan(content, config)
 
 <template>
   <div>
+    <Head>
+      <title>Factorio Hub</title>
+    </Head>
     <h1>Factorio Hub <GithubLink /></h1>
 
     <ConfigFactory
