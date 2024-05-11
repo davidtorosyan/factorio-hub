@@ -1,40 +1,34 @@
-# Nuxt 3 Minimal Starter
+# Factorio Hub
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Table of contents
 
-## Setup
+- [Introduction](#introduction)
+- [Development](#development)
+- [License](#license)
 
-Make sure to install the dependencies:
+## Introduction
 
-```bash
+This is the project for Factorio Hub, a resource planning website for [Factorio](https://www.factorio.com/).
+
+Built with [Nuxt](https://nuxt.com/) and [PrimeVue](https://primevue.org/).
+
+## Development
+
+Make sure you have [node](https://nodejs.org/en/) installed then run:
+```
 npm install
 ```
 
-## Development Server
+Here's a list of the more useful commands:
 
-Start the development server on `http://localhost:3000`:
+| Command                | Description |
+| ---------------------- | ------------|
+| `npm run dev`          | Start the development server on `http://localhost:3000` |
+| `npx nuxi typecheck`   | Check types. |
+| `npm run build`        | Build for production. |
+| `npm run preview`      | Preview production build. |
+| `npm run generate`     | Create static build. |
 
-```bash
-npm run dev
-```
 
-Check types:
-```bash
-npx nuxi typecheck
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
