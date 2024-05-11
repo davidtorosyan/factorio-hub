@@ -15,7 +15,14 @@ const plan = useFactoryPlan(content, config)
     <Head>
       <title>Factorio Hub</title>
     </Head>
-    <h1>Factorio Hub <GithubLink /></h1>
+    <h1>
+      <ConfigBadge
+        name="Factorio Hub"  
+        :image="images.icons.get('roboport')"
+      >
+        <GithubLink />
+      </ConfigBadge>
+    </h1>
 
     <ConfigFactory
       v-model="config"
