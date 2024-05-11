@@ -1,4 +1,4 @@
-# Factorio Hub
+# ![logo](public/logo.png) Factorio Hub
 
 ## Table of contents
 
@@ -8,7 +8,7 @@
 
 ## Introduction
 
-This is the project for Factorio Hub, a resource planning website for [Factorio](https://www.factorio.com/).
+This is the project for https://factoriohub.net, a resource planning website for [Factorio](https://www.factorio.com/).
 
 Built with [Nuxt](https://nuxt.com/) and [PrimeVue](https://primevue.org/).
 
