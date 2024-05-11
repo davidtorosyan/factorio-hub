@@ -12,7 +12,7 @@ const plan = useFactoryPlan(content, config)
 
 <template>
   <div>
-    <h1>Factorio Planner <GithubLink /></h1>
+    <h1>Factorio Hub <GithubLink /></h1>
 
     <ConfigFactory
       v-model="config"
